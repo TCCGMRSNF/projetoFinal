@@ -7,6 +7,8 @@ Regras de Negócio:
 - O número de decimais do score final não pode ser menor quem o número de decimais das notas.
 - A nota de todos os avaliadores têm o mesmo peso.
 - O score final é composto pela média ponderada das notas do candidato em cada quesito.
+- A votação de cada quesito pode ser liberada/encerrada individualmente
+
  
 
 
@@ -17,5 +19,11 @@ Campo: funcao
 1 = Avaliador
 2 = Candidato
 
+Tabela resultados:
+1) quando qst_id = 0, é o registro do score final.
+
+
+Features Futuras:
+1) Criar um novo evento baseado em um já existente.
 
 
