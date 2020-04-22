@@ -7,10 +7,12 @@ Regras de Negócio:
 - O número de decimais do score final não pode ser menor quem o número de decimais das notas.
 - A nota de todos os avaliadores têm o mesmo peso.
 - O score final é composto pela média ponderada das notas do candidato em cada quesito.
-- A votação de cada quesito pode ser liberada/encerrada individualmente
+- É apresentado menu para selecionar qual o quesito que o avaliador quer votar (se a votação estiver aberta)
+- A quantidade de aprovados deve ser >=0 e <= ao númrero de participantes.
 
+SELEÇÃO CIA MUNICIPAL DE DANÇA 2020
  
-
+==== quantidade de aprovados
 
 Tabela evento_usuario
 ---------------------
