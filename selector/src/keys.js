@@ -1,9 +1,9 @@
 module.exports = {
     database: {
         host: 'mysql669.umbler.com',
-        user: 'kzkadmin',
+        user: 'selector_adm',
         password: 'senacrs2020',
-        database: 'kaizuka',
+        database: 'selector',
         port: 41890
     }
 };

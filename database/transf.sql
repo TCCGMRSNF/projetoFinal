@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   CONSTRAINT `FK_eventos_usuarios` FOREIGN KEY (`owner`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela kaizuka.eventos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela kaizuka.eventos: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
 INSERT INTO `eventos` (`id`, `owner`, `descricao`, `resumo`, `qtd_cand`, `qtd_aprov`, `ts_ini`, `ts_fim`, `nota_min`, `nota_max`, `nota_decimais`, `score_decimais`, `editar`, `votar`, `ts_new`, `ts_upd`) VALUES
 	(1, 19, 'SELEÇÃO BAILARINOS CIA MUNICIPAL DE', '', 0, 0, '2020-04-25 09:00:00', '2020-04-25 16:00:00', 0.000000000000000, 0.000000000000000, 2, 3, '', '', '2020-04-19 21:53:50', '2020-05-12 19:55:19');
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `notas` (
   CONSTRAINT `FK_notas_evento-quesito` FOREIGN KEY (`evt_id`, `qst_id`) REFERENCES `evento-quesito` (`evt_id`, `qst_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela kaizuka.notas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela kaizuka.notas: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `notas` DISABLE KEYS */;
 INSERT INTO `notas` (`evt_id`, `qst_id`, `avl_id`, `cdt_id`, `nota`, `ts_new`, `ts_upd`) VALUES
 	(1, 1, 2, 3, 5.000000000000000, '2020-04-21 20:13:09', '2020-04-21 20:13:09');
