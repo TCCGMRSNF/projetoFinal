@@ -61,6 +61,7 @@ app.use((req, res, next) => {
 app.use(require('./routes'));     // index.js está implícito
 app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
+app.use('/usuarios', require('./routes/usuarios'));
 
 
 

@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TCCGMRSNF/selector.git"
+    "url": "git+https://github.com/TCCGMRSNF/projetoFinal/selector.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TCCGMRSNF/selector/issues"
+    "url": "https://github.com/TCCGMRSNF/projetoFinal/selector/issues"
   },
-  "homepage": "https://github.com/TCCGMRSNF/selector#readme",
+  "homepage": "https://github.com/TCCGMRSNF/projetoFinal/selector#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
@@ -26,6 +26,7 @@
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.0",
     "express-validator": "^6.4.0",
+    "faker": "^4.1.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",

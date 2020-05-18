@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const helpers = require('../lib/helpers');
+
 
 const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
@@ -17,7 +19,10 @@ router.post('/signin', isNotLoggedIn, (req, res, next) => {
 });
 
 router.get('/signup', isLoggedIn, (req, res) => {
-    res.render('auth/signup');
+    const usuario = helpers.fakeUser('pt_BR');
+    console.log(usuario);
+    res.render('auth/signup', {usuario: usuario});
+//    res.render('auth/signup');
 });
 
 router.post('/signup', isLoggedIn, passport.authenticate('local.signup', {
