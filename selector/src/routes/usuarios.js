@@ -8,7 +8,8 @@ const { isLoggedIn } = require('../lib/auth');
 router.get('/', async (req, res) => {
     const usuarios = await pool.query('SELECT * FROM usuarios');
     //console.log(links);
-    res.render('usuarios/list_grid', { usuarios });
+    bread = '1';
+    res.render('usuarios/list_grid', { usuarios, bread } );
 });
 
 module.exports = router;

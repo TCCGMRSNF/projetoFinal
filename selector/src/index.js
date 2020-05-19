@@ -53,6 +53,7 @@ app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
     app.locals.authUser = req.user;
+    app.locals.bread = req.bread;
     next();
 });
 
@@ -62,6 +63,7 @@ app.use(require('./routes'));     // index.js está implícito
 app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
 app.use('/usuarios', require('./routes/usuarios'));
+app.use('/eventos', require('./routes/eventos'));
 
 
 
