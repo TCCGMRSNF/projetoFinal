@@ -1,0 +1,146 @@
+LastSessions<|||>1<|||>Selector
+LastActiveSession<|||>1<|||>Selector
+ColWidths_connform.ListSessions<|||>1<|||>163,50,50,50,50,50,10
+ColsVisible_connform.ListSessions<|||>1<|||>0,1,4,6
+ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
+ColSort_connform.ListSessions<|||>1<|||>0,0
+SessionManager_WindowLeft<|||>3<|||>1522
+MemoEditorWidth<|||>3<|||>136
+ColWidths_frmTableEditor.listColumns<|||>1<|||>60,100,154,90,60,107,50,283,130,140,100,100
+ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
+ColWidths_frmTableEditor.treeIndexes<|||>1<|||>389,100,80
+ColsVisible_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColPositions_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColSort_frmTableEditor.treeIndexes<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listForeignKeys<|||>1<|||>162,80,100,113,80,80
+ColsVisible_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColPositions_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColSort_frmTableEditor.listForeignKeys<|||>1<|||>-1,0
+MainWinMaximized<|||>3<|||>1
+ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
+ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColPositions_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColSort_MainForm.ListDatabases<|||>1<|||>0,0
+ColWidths_MainForm.ListVariables<|||>1<|||>160,200,428
+ColsVisible_MainForm.ListVariables<|||>1<|||>0,1,2
+ColPositions_MainForm.ListVariables<|||>1<|||>0,1,2
+ColSort_MainForm.ListVariables<|||>1<|||>0,0
+ColWidths_MainForm.ListStatus<|||>1<|||>160,428,100,100
+ColsVisible_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColPositions_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColSort_MainForm.ListStatus<|||>1<|||>0,0
+ColWidths_MainForm.ListProcesses<|||>1<|||>70,80,80,80,80,50,50,154
+ColsVisible_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColPositions_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColSort_MainForm.ListProcesses<|||>1<|||>0,1
+ColWidths_MainForm.ListCommandStats<|||>1<|||>120,100,100,100,368
+ColsVisible_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColPositions_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColSort_MainForm.ListCommandStats<|||>1<|||>1,1
+ColWidths_MainForm.ListTables<|||>1<|||>120,70,70,120,120,70,100,50,70,70,70,70,70,90,120,70,70,70,50
+ColsVisible_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,18
+ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ColSort_MainForm.ListTables<|||>1<|||>0,0
+MainWinOnMonitor<|||>3<|||>0
+DateTimeEditor_CursorPos_Type4<|||>3<|||>8
+querymemoheight<|||>3<|||>203
+ExportSQL_CreateTables<|||>3<|||>1
+ExportSQL_Filenames<|||>1<|||>C:\Z_DEV\github\projetoFinal\database\transf.sql<{{{><}}}>C:\Z_DEV\github\projetoFinal\database\resultados.sql<{{{><}}}>C:\Z_DEV\github\projetoFinal\database\quesitos.sql<{{{><}}}>
+FileDialogEncoding_MainForm<|||>3<|||>0
+ExportSQL_CreateDatabases<|||>3<|||>0
+ExportSQL_DataHow<|||>3<|||>2
+SQLFile0<|||>1<|||>C:\DEV\HeidiSQL_11.0_64_Portable\Backups\query-tab-2020-04-19_21-07-56-788.sql
+SQLFile1<|||>1<|||>C:\DEV\HeidiSQL_11.0_64_Portable\Backups\query-tab-2020-04-18_21-58-45-947.sql
+SQLFile2<|||>1<|||>C:\Z_DEV\github\projetoFinal\database\resultados.sql
+SQLFile3<|||>1<|||>C:\Z_DEV\github\projetoFinal\database\quesitos.sql
+Servers\kaizuka\SessionCreated<|||>1<|||>2020-04-11 21:31:17
+Servers\kaizuka\Host<|||>1<|||>mysql669.umbler.com
+Servers\kaizuka\WindowsAuth<|||>3<|||>0
+Servers\kaizuka\CleartextPluginEnabled<|||>3<|||>0
+Servers\kaizuka\User<|||>1<|||>kzkadmin
+Servers\kaizuka\Password<|||>1<|||>7C6E776A6C7B7C3B393B399
+Servers\kaizuka\LoginPrompt<|||>3<|||>0
+Servers\kaizuka\Port<|||>1<|||>41890
+Servers\kaizuka\NetType<|||>3<|||>0
+Servers\kaizuka\Compressed<|||>3<|||>0
+Servers\kaizuka\LocalTimeZone<|||>3<|||>0
+Servers\kaizuka\QueryTimeout<|||>3<|||>30
+Servers\kaizuka\KeepAlive<|||>3<|||>20
+Servers\kaizuka\FullTableStatus<|||>3<|||>1
+Servers\kaizuka\Databases<|||>1<|||>
+Servers\kaizuka\Library<|||>1<|||>libmysql.dll
+Servers\kaizuka\Comment<|||>1<|||>
+Servers\kaizuka\StartupScriptFilename<|||>1<|||>
+Servers\kaizuka\TreeBackground<|||>3<|||>536870911
+Servers\kaizuka\SSHtunnelHost<|||>1<|||>
+Servers\kaizuka\SSHtunnelHostPort<|||>3<|||>22
+Servers\kaizuka\SSHtunnelUser<|||>1<|||>
+Servers\kaizuka\SSHtunnelPassword<|||>1<|||>6
+Servers\kaizuka\SSHtunnelTimeout<|||>3<|||>4
+Servers\kaizuka\SSHtunnelPrivateKey<|||>1<|||>
+Servers\kaizuka\SSHtunnelPort<|||>3<|||>3307
+Servers\kaizuka\SSL_Active<|||>3<|||>0
+Servers\kaizuka\SSL_Key<|||>1<|||>
+Servers\kaizuka\SSL_Cert<|||>1<|||>
+Servers\kaizuka\SSL_CA<|||>1<|||>
+Servers\kaizuka\SSL_Cipher<|||>1<|||>
+Servers\kaizuka\RefusedCount<|||>3<|||>2
+Servers\kaizuka\ServerVersionFull<|||>1<|||>5.6.40 - MySQL Community Server (GPL)
+Servers\kaizuka\ConnectCount<|||>3<|||>21
+Servers\kaizuka\ServerVersion<|||>3<|||>50640
+Servers\kaizuka\LastConnect<|||>1<|||>2020-05-16 20:59:30
+Servers\kaizuka\lastUsedDB<|||>1<|||>kaizuka
+Servers\kaizuka\kaizuka|evento-quesito\Sort<|||>1<|||>0_ordem|
+Servers\kaizuka\kaizuka|links\Sort<|||>1<|||>0_description|
+Servers\kaizuka\QueryHistory\1<|||>1<|||>2020-04-18 22:20:43|kaizuka|47|CREATE TABLE `usuarios2` (<{{{><}}}>	`id` INT(10) NOT NULL AUTO_INCREMENT,<{{{><}}}>	`email` VARCHAR(50) NOT NULL DEFAULT '' COLLATE 'latin1_swedish_ci',<{{{><}}}>	`senha` VARCHAR(50) NOT NULL DEFAULT '' COLLATE 'latin1_swedish_ci',<{{{><}}}>	PRIMARY KEY (`id`) USING BTREE<{{{><}}}>)<{{{><}}}>COLLATE='latin1_swedish_ci'<{{{><}}}>ENGINE=InnoDB<{{{><}}}>AUTO_INCREMENT=3<{{{><}}}>;<{{{><}}}>
+Servers\kaizuka\QueryHistory\2<|||>1<|||>2020-04-19 21:04:14|kaizuka|0|
+Servers\kaizuka\QueryHistory\3<|||>1<|||>2020-04-19 21:27:30|kaizuka|78|ALTER TABLE eventos <{{{><}}}>ADD 	`ts_new` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+Servers\kaizuka\QueryHistory\4<|||>1<|||>2020-04-19 21:33:56|kaizuka|62|ALTER TABLE eventos <{{{><}}}>ADD 	`ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Servers\kaizuka\QueryHistory\5<|||>1<|||>2020-04-19 21:42:51|kaizuka|157|ALTER TABLE evento_usuario<{{{><}}}>ADD `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;<{{{><}}}><{{{><}}}>ALTER TABLE evento_usuario<{{{><}}}>ADD 	`ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+Servers\kaizuka\QueryHistory\6<|||>1<|||>2020-04-20 21:42:36|kaizuka|78|ALTER TABLE quesitos<{{{><}}}>ADD `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+Servers\kaizuka\QueryHistory\7<|||>1<|||>2020-04-20 21:43:15|kaizuka|94|ALTER TABLE quesitos<{{{><}}}>ADD 	`ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+Servers\kaizuka\QueryHistory\8<|||>1<|||>2020-04-21 12:38:41|kaizuka|171|ALTER TABLE notas<{{{><}}}>ADD `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;<{{{><}}}><{{{><}}}>ALTER TABLE notas<{{{><}}}>ADD 	`ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+Servers\kaizuka\QueryHistory\10<|||>1<|||>2020-04-21 22:11:49|kaizuka|31|DESCRIBE links
+Servers\Selector\SessionCreated<|||>1<|||>2020-05-16 20:53:08
+Servers\Selector\Host<|||>1<|||>mysql669.umbler.com
+Servers\Selector\WindowsAuth<|||>3<|||>0
+Servers\Selector\CleartextPluginEnabled<|||>3<|||>0
+Servers\Selector\User<|||>1<|||>selector_adm
+Servers\Selector\Password<|||>1<|||>7C6E776A6C7B7C3B393B399
+Servers\Selector\LoginPrompt<|||>3<|||>0
+Servers\Selector\Port<|||>1<|||>41890
+Servers\Selector\NetType<|||>3<|||>0
+Servers\Selector\Compressed<|||>3<|||>0
+Servers\Selector\LocalTimeZone<|||>3<|||>0
+Servers\Selector\QueryTimeout<|||>3<|||>30
+Servers\Selector\KeepAlive<|||>3<|||>20
+Servers\Selector\FullTableStatus<|||>3<|||>1
+Servers\Selector\Databases<|||>1<|||>
+Servers\Selector\Library<|||>1<|||>libmysql.dll
+Servers\Selector\Comment<|||>1<|||>
+Servers\Selector\StartupScriptFilename<|||>1<|||>
+Servers\Selector\TreeBackground<|||>3<|||>536870911
+Servers\Selector\SSHtunnelHost<|||>1<|||>
+Servers\Selector\SSHtunnelHostPort<|||>3<|||>22
+Servers\Selector\SSHtunnelUser<|||>1<|||>
+Servers\Selector\SSHtunnelPassword<|||>1<|||>7
+Servers\Selector\SSHtunnelTimeout<|||>3<|||>4
+Servers\Selector\SSHtunnelPrivateKey<|||>1<|||>
+Servers\Selector\SSHtunnelPort<|||>3<|||>3307
+Servers\Selector\SSL_Active<|||>3<|||>0
+Servers\Selector\SSL_Key<|||>1<|||>
+Servers\Selector\SSL_Cert<|||>1<|||>
+Servers\Selector\SSL_CA<|||>1<|||>
+Servers\Selector\SSL_Cipher<|||>1<|||>
+Servers\Selector\ServerVersionFull<|||>1<|||>5.6.40 - MySQL Community Server (GPL)
+Servers\Selector\ConnectCount<|||>3<|||>5
+Servers\Selector\ServerVersion<|||>3<|||>50640
+Servers\Selector\LastConnect<|||>1<|||>2020-05-19 19:10:29
+Servers\Selector\lastUsedDB<|||>1<|||>selector
+Servers\Selector\QueryHistory\2<|||>1<|||>2020-05-18 21:27:29|selector|31|SELECT * FROM eventos WHERE OWNER=19
+Servers\Selector\QueryHistory\1<|||>1<|||>2020-05-19 19:17:04|selector|47|SELECT * FROM eventos e<{{{><}}}>WHERE<{{{><}}}>id IN(1,2)<{{{><}}}>
+Servers\Selector\QueryHistory\3<|||>1<|||>2020-05-19 19:22:03|selector|31|SELECT * FROM `evento-usuario`
+Servers\Selector\QueryHistory\4<|||>1<|||>2020-05-19 19:24:21|selector|31|SELECT * FROM evento_usuario
+Servers\Selector\QueryHistory\5<|||>1<|||>2020-05-19 19:24:37|selector|31|SELECT * FROM eventos e<{{{><}}}>WHERE<{{{><}}}>id IN(<{{{><}}}>SELECT evt_id FROM evento_usuario WHERE usr_id=19<{{{><}}}>)
