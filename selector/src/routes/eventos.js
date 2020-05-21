@@ -6,11 +6,9 @@ const { isLoggedIn } = require('../lib/auth');
 
 router.get('/:funcao', isLoggedIn, async (req, res) => {
     const { funcao } = req.params;
-    sFuncao = funcao.toString();
-    console.log('H'+funcao+'H');
     const eventos = await pool.query(
         'SELECT * FROM eventos WHERE id IN(SELECT evt_id FROM evento_usuario WHERE usr_id = ? AND funcao = ?)'
-        , [req.user.id, sFuncao]);
+        , [req.user.id, funcao.toString()]);
     console.log(eventos);
     res.render('eventos/eventos_list', { eventos });
 });

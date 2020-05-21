@@ -28,9 +28,9 @@
             <td>{{descricao}}</td>
             <td class="text-right">{{qtd_cand}}</td>
             <td class="text-right">{{qtd_aprov}}</td>
-            <td class="text-center">{{ts_ini}}</td>
-            <td class="text-center">{{ts_fim}}</td>
-            <td class="text-center">{{ts_upd}}</td>
+            <td class="text-center">{{fDataHora ts_ini '/'}}</td>
+            <td class="text-center">{{fDataHora ts_fim '.'}}</td>
+            <td class="text-center">{{fDataHora ts_upd '-'}}</td>
         </tr>
 
         {{/each}}

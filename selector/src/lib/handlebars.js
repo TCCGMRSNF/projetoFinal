@@ -8,6 +8,16 @@ helpers.isAdm = (adm) => {
 };
 */
 
+helpers.fDataHora = (isoDate, separator) => {
+    const time = isoDate.toTimeString().slice(0, 5);
+    const date = ('0' + isoDate.getDate()).slice(-2) + separator +
+        ('0' + isoDate.getMonth()).slice(-2) + separator +
+        isoDate.getFullYear();
+    return (date + ' ' + time);
+};
+
+
+
 helpers.timeago = (timestamp) => {
     register('pt_BR', default_1);
     return format(timestamp, 'pt_BR');
