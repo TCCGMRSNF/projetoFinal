@@ -14,24 +14,48 @@
             <tr>
                 <th class="text-right">Id</th>
                 <th>Descrição</th>
+                <th class="text-center">Avaliação</th>
                 <th class="text-right">Cand</th>
                 <th class="text-right">Aprov</th>
                 <th class="text-center">Início</th>
                 <th class="text-center">Final</th>
                 <th class="text-center">Última Edição</th>
+                <th class="text-center">Head1</th>
+                <th class="text-center">Head1</th>
+                <th class="text-center">Head2</th>
+                <th class="text-center">Head3</th>
+                <th class="text-center">Head4</th>
+                <th class="text-center">Head5</th>
+                <th class="text-center">Head6</th>
+                <th class="text-center">Head7</th>
             </tr>
         </thead>
+
+
+
 
         {{#each eventos}}
         <tr>
             <td class="text-right">{{id}}</td>
             <td>{{descricao}}</td>
+<td class="text-center">
+<i class="fas fa-award"></i>
+<i class="far fa-circle text-success"></i>
+<i class="fas fa-circle text-success"text></i>
+<i class="far fa-circle text-danger"></i>
+<i class="fas fa-circle text-danger"text></i>
+</td>
+
+
             <td class="text-right">{{qtd_cand}}</td>
             <td class="text-right">{{qtd_aprov}}</td>
             <td class="text-center">{{fDataHora ts_ini '/'}}</td>
             <td class="text-center">{{fDataHora ts_fim '.'}}</td>
             <td class="text-center">{{fDataHora ts_upd '-'}}</td>
+        <td><i class="fas fa-flag-checkered text-danger"></i></td>
+
         </tr>
+
 
         {{/each}}
 

@@ -31,7 +31,11 @@ helpers.fakeUser = (locale) => {
     return fakeUser;
 }
 
-
+/*
+helpers.isAdm = (adm) => {
+    return adm === 'Y';
+};
+*/
 
 
 

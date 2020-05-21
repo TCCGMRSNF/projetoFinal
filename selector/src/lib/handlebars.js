@@ -2,11 +2,7 @@ const { format, register } = require('timeago.js');
 
 const helpers = {};
 
-/*
-helpers.isAdm = (adm) => {
-    return adm === 'Y';
-};
-*/
+
 
 helpers.fDataHora = (isoDate, separator) => {
     const time = isoDate.toTimeString().slice(0, 5);
