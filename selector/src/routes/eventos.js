@@ -10,7 +10,9 @@ router.get('/:funcao', isLoggedIn, async (req, res) => {
         'SELECT * FROM eventos WHERE id IN(SELECT evt_id FROM evento_usuario WHERE usr_id = ? AND funcao = ? ORDER BY ts_ini DESC)'
         , [req.user.id, funcao.toString()]);
     console.log(eventos);
-    res.render('eventos/eventos_list', { eventos });
+    const menu = [false,false,false];
+    menu[funcao] = true;
+    res.render('eventos/eventos_list', { eventos, menu0: menu[0], menu1: menu[1], menu2: menu[2], menu: true});
 });
 
 /*

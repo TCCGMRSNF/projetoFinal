@@ -37,7 +37,10 @@ router.get('/profile', isLoggedIn, (req, res) => {
 });
 
 router.get('/landing/master', isLoggedIn, (req, res) => {
-    res.render('landing/master');
+    res.redirect('/profile');
+
+    //    res.redirect('/eventos/0');
+//    res.render('landing/master');
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {

@@ -53,7 +53,6 @@ app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
     app.locals.authUser = req.user;
-    app.locals.bread = req.bread;
     next();
 });
 

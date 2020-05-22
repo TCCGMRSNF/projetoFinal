@@ -2,10 +2,10 @@
   "name": "selector",
   "version": "1.0.0",
   "description": "TCC GMR+SNF SENACRS 2020/1",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",

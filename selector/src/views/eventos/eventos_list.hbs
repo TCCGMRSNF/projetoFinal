@@ -1,13 +1,4 @@
-<div>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/links">Coordenador</a></li>
-            <li class="breadcrumb-item"><a href="/profile">Evento [00012]</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Notas</li>
-        </ol>
-    </nav>
-</div>
-
+{{>breadcrumb}}
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
     <table class="table table-striped table-sm table-hover mb-0">
         <thead>
@@ -53,6 +44,10 @@
             <td class="text-center">{{fDataHora ts_fim '.'}}</td>
             <td class="text-center">{{fDataHora ts_upd '-'}}</td>
         <td><i class="fas fa-flag-checkered text-danger"></i></td>
+        <td><i class="fab fa-node text-success"></i></td>
+        <td><i class="fas fa-jedi text-warning"></i></td>
+
+
 
         </tr>
 

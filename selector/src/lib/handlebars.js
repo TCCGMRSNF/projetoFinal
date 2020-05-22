@@ -2,6 +2,10 @@ const { format, register } = require('timeago.js');
 
 const helpers = {};
 
+helpers.menuIndex = (index, op) => {
+    return (index == op);
+};
+
 
 
 helpers.fDataHora = (isoDate, separator) => {
