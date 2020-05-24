@@ -1,6 +1,6 @@
 body {
     background: #f5f6f5;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     overflow: hidden;
 }
 
@@ -39,6 +39,7 @@ body {
     position: relative;
     height: 500px;
     overflow: auto;
+    font-size: smaller;
     }
 
 .table-wrapper-scroll-y {
