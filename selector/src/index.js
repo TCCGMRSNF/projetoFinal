@@ -15,6 +15,7 @@ const { database } = require('./keys');
 // Initializations
 const app = express();
 require('./lib/passport');
+snf = new Array (true, false, false, false);
 
 
 
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
     app.locals.authUser = req.user;
+    app.locals.funcao = req.funcao;
     next();
 });
 

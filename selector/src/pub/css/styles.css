@@ -40,8 +40,24 @@ body {
     height: 500px;
     overflow: auto;
     font-size: smaller;
+
     }
 
 .table-wrapper-scroll-y {
 display: block;
+}
+
+.snf-link1 {
+    font-weight: bold;
+    text-decoration: none;
+    color: black
+ 
+}
+
+a:hover.snf-link1 {
+/*    background-color: darkblue;
+    color: white;
+    text-decoration: none;    */
+    text-decoration: underline;   
+
 }
