@@ -61,3 +61,7 @@ a:hover.snf-link1 {
     text-decoration: underline;   
 
 }
+
+li.active {
+    font-weight: bolder;
+}

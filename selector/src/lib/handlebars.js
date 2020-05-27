@@ -2,10 +2,45 @@ const { format, register } = require('timeago.js');
 
 const helpers = {};
 
-helpers.menuIndex = (index, op) => {
-    return (index == op);
-};
+helpers.bcMenu = (index) => {
 
+    var bloco = '';
+    const op = ['Coordenador', 'Avaliador', 'Candidato'];
+    const p = 'Perfil';
+    const fix = '<li class="breadcrumb-item';
+    const end = '</a></li>';
+
+    if (!index) {
+        bloco += fix + ' active" aria-current="page">' + p + end;
+        bloco += fix + '"><a href="/eventos/funcao/0">' + op[0] + end;
+        bloco += fix + '"><a href="/eventos/funcao/1">' + op[1] + end;
+        bloco += fix + '"><a href="/eventos/funcao/2">' + op[2] + end;
+    
+    };
+
+    if (index == 0) {
+        bloco += fix + '"><a href="/profile">' + p + end;
+        bloco += fix + ' active" aria-current="page">' + op[0] + end;
+        bloco += fix + '"><a href="/eventos/funcao/1">' + op[1] + end;
+        bloco += fix + '"><a href="/eventos/funcao/2">' + op[2] + end;
+    };
+
+    if (index == 1) {
+        bloco += fix + '"><a href="/profile">' + p + end;
+        bloco += fix + '"><a href="/eventos/funcao/0">' + op[0] + end;
+        bloco += fix + ' active" aria-current="page">' + op[1] + end;
+        bloco += fix + '"><a href="/eventos/funcao/2">' + op[2] + end;
+    };
+
+    if (index == 2) {
+        bloco += fix + '"><a href="/profile">' + p + end;
+        bloco += fix + '"><a href="/eventos/funcao/0">' + op[0] + end;
+        bloco += fix + '"><a href="/eventos/funcao/1">' + op[1] + end;
+        bloco += fix + ' active" aria-current="page">' + op[2] + end;
+    };
+
+    return (bloco);
+};
 
 
 helpers.fDataHora = (isoDate, separator) => {
