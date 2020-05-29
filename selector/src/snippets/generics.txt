@@ -1,0 +1,7 @@
+            <td class="text-center">
+                <i class="fas fa-award"></i>
+                <i class="far fa-circle text-success"></i>
+                <i class="fas fa-circle text-success" text></i>
+                <i class="far fa-circle text-danger"></i>
+                <i class="fas fa-circle text-danger" text></i>
+            </td>

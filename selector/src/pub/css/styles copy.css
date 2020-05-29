@@ -1,21 +1,10 @@
 body {
     background: #f5f6f5;
     font-family: 'Ubuntu', sans-serif;
-    overflow: auto;
-/*    margin-top: 55px;*/
-/*    overflow:auto;*/
-}
-
-body.masthead {
-    background: #f5f6f5;
-    font-family: 'Ubuntu', sans-serif;
-/*    margin-top: 0px;*/
-
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .index {
-    overflow: hidden;
     width: 100vw;
     height: 100vh;
 }
@@ -30,13 +19,13 @@ body.masthead {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-/*    overflow:hidden;*/
 }
 
 .masthead h1 {
     font-size: 4rem;
     margin: 0;
     padding: 0;
+
 }
 
 @media (min-width:992px) {
@@ -48,7 +37,7 @@ body.masthead {
 
 .my-custom-scrollbar {
     position: relative;
-    height: 30%;
+    height: 500px;
     overflow: auto;
     font-size: smaller;
 
