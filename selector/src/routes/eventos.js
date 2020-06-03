@@ -11,16 +11,46 @@ router.get('/funcao/:funcao', isLoggedIn, async (req, res) => {
         , [req.user.id, funcao.toString()]);
     console.log(eventos);
     console.log(funcao);
-    res.render('eventos/eventos_list', { eventos, funcao});
+    res.render('eventos/eventos_list', { eventos, funcao });
 });
 
+
+
+/*=====================================================================*/
 router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     const { id, funcao } = req.params;
-    const eventos = await pool.query(
-        'SELECT * FROM eventos WHERE id = ?', [id.toString()]);
-    console.log(eventos);
-    res.render('eventos/eventos_display', { eventos, funcao});
+    const sId = id.toString();
+
+    const evento = await pool.query(
+        'SELECT * FROM eventos WHERE id = ? limit 1', [sId]);
+
+    const quesitos = await pool.query(
+        'SELECT * FROM quesitos WHERE id IN(SELECT qst_id FROM evento_quesito WHERE evt_id = ?)'
+        , [sId]);
+
+    const avaliadores = await pool.query(
+        'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "1")'
+        , [sId]);
+
+    const candidatos = await pool.query(
+        'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
+        , [sId]);
+
+
+
+    console.log(evento);
+    console.log(sId);
+    console.log(quesitos);
+    console.log(avaliadores);
+    console.log(candidatos);
+
+    res.render('eventos/evento_display', { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
+
+
+
 });
+/*=====================================================================*/
+
 
 /*
 router.get('/:funcao', isLoggedIn, async (req, res) => {
