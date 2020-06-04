@@ -9,9 +9,11 @@ router.get('/funcao/:funcao', isLoggedIn, async (req, res) => {
     const eventos = await pool.query(
         'SELECT * FROM eventos WHERE id IN(SELECT evt_id FROM evento_usuario WHERE usr_id = ? AND funcao = ? ORDER BY ts_ini DESC)'
         , [req.user.id, funcao.toString()]);
+
+    const rota = 'eventos/eventos_list_' + funcao.toString()
     console.log(eventos);
     console.log(funcao);
-    res.render('eventos/eventos_list', { eventos, funcao });
+    res.render(rota, { eventos, funcao });
 });
 
 
