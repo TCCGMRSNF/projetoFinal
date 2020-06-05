@@ -38,7 +38,7 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
         'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
         , [sId]);
 
-
+        const rota = 'eventos/eventos_' + funcao.toString() + '_A'
 
     console.log(evento);
     console.log(sId);
@@ -46,7 +46,7 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     console.log(avaliadores);
     console.log(candidatos);
 
-    res.render('eventos/evento_display', { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
+    res.render(rota, { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
 
 
 
