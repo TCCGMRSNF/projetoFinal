@@ -19,6 +19,7 @@ snf = new Array (true, false, false, false);
 
 
 
+
 // Settings
 app.set('port', process.env.PORT || 3000);   // Umbler tem que ser porta 3000
 app.set('views', path.join(__dirname, 'views'));
