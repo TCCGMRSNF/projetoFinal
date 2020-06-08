@@ -42,18 +42,18 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     const rota = 'eventos/eventos_' + funcao.toString() + '_A';
 
 
-/*
-    for (i = 0; i < candidatos.length; i++) {
-        var sCand = candidatos[i].id.toString();
-        var ret = fillArrayNotas(sId, sAvl, sCand, quesitos);  
-        console.log(candidatos[i].id, candidatos[i].nome, ret);
-        candidatos[i].notas = ret;
-//        console.log(candidatos[i]);
-    }
+    /*
+        for (i = 0; i < candidatos.length; i++) {
+            var sCand = candidatos[i].id.toString();
+            var ret = fillArrayNotas(sId, sAvl, sCand, quesitos);  
+            console.log(candidatos[i].id, candidatos[i].nome, ret);
+            candidatos[i].notas = ret;
+    //        console.log(candidatos[i]);
+        }
+    
+    */
 
-*/
-
-//    fillArrayNotas(sId, sAvl, quesitos, candidatos)
+    //    fillArrayNotas(sId, sAvl, quesitos, candidatos)
 
     /* 
         console.log(evento);
@@ -64,13 +64,16 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     */
 
 
-   const aNotas = await pool.query(
-    'SELECT * FROM notas WHERE evt_id = ? AND avl_id = ?'
-    , [sId, sAvl]);
+    const notas = await pool.query(
+        'SELECT * FROM notas WHERE evt_id = ? AND avl_id = ?'
+        , [sId, sAvl]);
 
-    console.log(candidatos);
-    console.log('Notas---------------------');
-    console.log(aNotas);
+    candidatos = preparaGridNotas(candidatos, quesitos, notas);
+
+    //   console.log(candidatos);
+    //   console.log(quesitos);
+    //   console.log('Notas---------------------');
+    //   console.log(notas);
 
 
     res.render(rota, { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
@@ -79,10 +82,35 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
 
 });
 
-async function arrayNotas(idEvt, idAvl) {
+function preparaGridNotas(candidatos, quesitos, notas) {
+//    var xNotas = [];
 
-// Return da função -------------------
-    return (aNotas);
+    candidatos.forEach((can) => {
+        can.notas = [];
+        quesitos.forEach((ques) => {
+            can.notas.push(-1);
+        });
+    });
+
+    // Inserir as notas no candidato e quesito correto ----------
+        notas.forEach((nt, index) => {
+    
+            var i_qst = quesitos.findIndex((ques, index, array) => ques.id === nt.qst_id);
+            console.log('Ind Quesito: ', i_qst);
+    
+            var i_can = candidatos.findIndex((cand, index, array) => cand.id === nt.cdt_id);
+            console.log('Ind Candidato: ', i_can);
+    
+            console.log(candidatos[i_can].notas);
+            console.log('Nota: ', nt.nota);
+            candidatos[i_can].notas[i_qst] = nt.nota;
+            //            candidatos[i_can].notas[i_qst] = nt.nota;
+    
+        });
+        console.log(candidatos);
+
+    // Return da função -------------------
+    return (candidatos);
 }
 
 
@@ -94,26 +122,26 @@ async function arrayNotas(idEvt, idAvl) {
 
 
 function fillArrayNotas(idEvt, idAvl, idCand, quesitos) {
-        var aNotas = [];
-        quesitos.map(async (ques, index) => {
-            var nt = -1;   //ques.id;
-            
-            var sqlNota = await pool.query(
-                'SELECT * FROM notas WHERE evt_id = ? AND qst_id = ? AND avl_id = ? AND cdt_id = ? limit 1'
-                , [idEvt, ques.id.toString(), idAvl, idCand]);
+    var aNotas = [];
+    quesitos.map(async (ques, index) => {
+        var nt = -1;   //ques.id;
 
-            console.log(idEvt, ques.id.toString(), idAvl, idCand, sqlNota)                
+        var sqlNota = await pool.query(
+            'SELECT * FROM notas WHERE evt_id = ? AND qst_id = ? AND avl_id = ? AND cdt_id = ? limit 1'
+            , [idEvt, ques.id.toString(), idAvl, idCand]);
+
+        console.log(idEvt, ques.id.toString(), idAvl, idCand, sqlNota)
 
 
-            if (sqlNota.length > 0) {
-                nt = sqlNota[0].nota;
-            }
+        if (sqlNota.length > 0) {
+            nt = sqlNota[0].nota;
+        }
 
-            aNotas.push(nt);
-        });
+        aNotas.push(nt);
+    });
 
     // Return da função -------------------
-        return (aNotas);
+    return (aNotas);
 }
 
 
