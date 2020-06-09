@@ -1,0 +1,560 @@
+-- --------------------------------------------------------
+-- Servidor:                     mysql669.umbler.com
+-- Versão do servidor:           5.6.40 - MySQL Community Server (GPL)
+-- OS do Servidor:               Linux
+-- HeidiSQL Versão:              11.0.0.5919
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Copiando estrutura para tabela selector.eventos
+CREATE TABLE IF NOT EXISTS `eventos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(50) NOT NULL DEFAULT '',
+  `resumo` varchar(200) NOT NULL DEFAULT '',
+  `qtd_cand` int(10) unsigned NOT NULL DEFAULT '0',
+  `qtd_aprov` int(10) unsigned NOT NULL DEFAULT '0',
+  `ts_ini` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_fim` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `nota_min` decimal(25,15) unsigned NOT NULL DEFAULT '0.000000000000000',
+  `nota_max` decimal(25,15) unsigned NOT NULL DEFAULT '0.000000000000000',
+  `nota_decimais` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `score_decimais` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `editar` tinyint(1) NOT NULL DEFAULT '0',
+  `votar` tinyint(1) NOT NULL DEFAULT '0',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.eventos: ~5 rows (aproximadamente)
+/*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
+INSERT INTO `eventos` (`id`, `descricao`, `resumo`, `qtd_cand`, `qtd_aprov`, `ts_ini`, `ts_fim`, `nota_min`, `nota_max`, `nota_decimais`, `score_decimais`, `editar`, `votar`, `ts_new`, `ts_upd`) VALUES
+	(1, 'SELEÇÃO BAILARINOS CIA MUNICIPAL DE DANÇA--------H', '', 70, 24, '2020-06-05 09:00:00', '2020-04-25 18:00:00', 1.000000000000000, 10.000000000000000, 2, 3, 0, 1, '2020-04-19 21:53:50', '2020-05-26 20:33:45'),
+	(2, 'SELEÇAO BAILARINOS CIA JOVEM 2020', '', 20, 10, '2020-05-18 18:00:00', '2020-05-18 22:00:00', 1.000000000000000, 10.000000000000000, 2, 4, 0, 0, '2020-05-18 21:23:43', '2020-05-26 20:24:59'),
+	(3, 'PROGRAMADORES JAVA/MYSQL/HTML5/CSS 2020 12345678H!', '', 25, 3, '2020-05-18 00:00:00', '2020-05-25 00:00:00', 0.000000000000000, 100.000000000000000, 1, 3, 0, 0, '2020-05-18 21:25:32', '2020-05-26 20:24:59'),
+	(4, 'EVENTO 4 - SELEÇÃO TESTE', '', 10, 2, '2020-05-26 00:00:00', '2020-06-07 00:00:00', 0.000000000000000, 0.000000000000000, 0, 0, 0, 0, '2020-05-19 22:37:46', '2020-05-26 20:24:59'),
+	(5, 'EVENTO MASTER 2020', '', 200, 10, '2020-05-19 15:30:45', '2020-05-19 00:00:00', 0.000000000000000, 0.000000000000000, 0, 0, 0, 0, '2020-05-19 20:37:36', '2020-05-26 20:24:59'),
+	(6, 'CONCURSO DE SELEÇÃO DA CIA MUNICIPAL DE DANÇA 2017', '', 45, 12, '2017-03-04 19:47:53', '2017-06-04 19:48:25', 1.000000000000000, 10.000000000000000, 2, 3, 1, 1, '2020-06-04 19:48:43', '2020-06-04 20:03:50');
+/*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.evento_quesito
+CREATE TABLE IF NOT EXISTS `evento_quesito` (
+  `evt_id` int(11) NOT NULL,
+  `qst_id` int(11) NOT NULL,
+  `peso` decimal(6,3) unsigned NOT NULL DEFAULT '1.000',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`qst_id`,`evt_id`),
+  KEY `FK_evento_quesito_eventos` (`evt_id`),
+  CONSTRAINT `FK_evento_quesito_eventos` FOREIGN KEY (`evt_id`) REFERENCES `eventos` (`id`),
+  CONSTRAINT `FK_evento_quesito_quesitos` FOREIGN KEY (`qst_id`) REFERENCES `quesitos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Quesitos de avaliação de cada evento';
+
+-- Copiando dados para a tabela selector.evento_quesito: ~16 rows (aproximadamente)
+/*!40000 ALTER TABLE `evento_quesito` DISABLE KEYS */;
+INSERT INTO `evento_quesito` (`evt_id`, `qst_id`, `peso`, `ts_new`, `ts_upd`) VALUES
+	(1, 1, 1.000, '2020-04-21 13:35:46', '2020-04-21 15:10:46'),
+	(2, 1, 1.000, '2020-05-29 18:18:36', '2020-05-29 18:18:36'),
+	(5, 1, 1.000, '2020-05-29 18:18:56', '2020-05-29 18:18:56'),
+	(6, 1, 1.000, '2020-06-04 20:09:02', '2020-06-04 20:09:02'),
+	(1, 2, 2.000, '2020-04-21 20:11:39', '2020-04-21 20:11:39'),
+	(2, 2, 1.000, '2020-05-29 18:18:41', '2020-05-29 18:18:41'),
+	(5, 2, 1.000, '2020-05-29 18:19:01', '2020-05-29 18:19:01'),
+	(6, 2, 2.000, '2020-06-04 20:09:15', '2020-06-04 20:09:15'),
+	(1, 3, 2.000, '2020-04-21 20:11:55', '2020-04-21 20:11:55'),
+	(2, 3, 1.000, '2020-05-29 18:18:50', '2020-05-29 18:18:50'),
+	(5, 3, 1.000, '2020-05-29 18:19:07', '2020-05-29 18:19:07'),
+	(6, 3, 1.000, '2020-06-04 20:09:25', '2020-06-04 20:09:25'),
+	(3, 4, 1.000, '2020-05-29 18:38:42', '2020-05-29 18:38:42'),
+	(3, 5, 1.000, '2020-05-29 18:38:48', '2020-05-29 18:38:48'),
+	(3, 6, 1.000, '2020-05-29 18:39:01', '2020-05-29 18:39:01'),
+	(3, 7, 1.000, '2020-05-29 18:40:04', '2020-05-29 18:40:04');
+/*!40000 ALTER TABLE `evento_quesito` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.evento_usuario
+CREATE TABLE IF NOT EXISTS `evento_usuario` (
+  `evt_id` int(11) NOT NULL,
+  `usr_id` int(11) NOT NULL,
+  `funcao` enum('0','1','2') NOT NULL DEFAULT '2',
+  `numero` varchar(3) NOT NULL DEFAULT '',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY `Index 3` (`evt_id`,`usr_id`,`funcao`),
+  KEY `FK_evento_usuario_usuarios` (`usr_id`),
+  CONSTRAINT `FK_evento_usuario_eventos` FOREIGN KEY (`evt_id`) REFERENCES `eventos` (`id`),
+  CONSTRAINT `FK_evento_usuario_usuarios` FOREIGN KEY (`usr_id`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.evento_usuario: ~80 rows (aproximadamente)
+/*!40000 ALTER TABLE `evento_usuario` DISABLE KEYS */;
+INSERT INTO `evento_usuario` (`evt_id`, `usr_id`, `funcao`, `numero`, `ts_new`, `ts_upd`) VALUES
+	(1, 19, '0', '', '2020-04-19 21:59:19', '2020-05-19 19:12:52'),
+	(1, 19, '1', '', '2020-05-21 01:21:28', '2020-05-21 01:21:28'),
+	(1, 20, '2', '', '2020-05-19 21:40:48', '2020-05-19 21:40:48'),
+	(1, 44, '1', '', '2020-05-17 21:47:34', '2020-05-19 19:13:45'),
+	(1, 50, '1', '', '2020-05-17 21:47:46', '2020-05-19 19:13:54'),
+	(1, 56, '2', '', '2020-05-19 20:41:25', '2020-05-19 20:41:25'),
+	(2, 19, '0', '', '2020-05-17 21:47:55', '2020-05-19 19:13:40'),
+	(2, 19, '1', '', '2020-05-21 01:21:51', '2020-05-21 01:21:51'),
+	(3, 19, '0', '', '2020-05-29 18:40:46', '2020-06-06 21:48:58'),
+	(3, 19, '1', '', '2020-06-06 21:49:25', '2020-06-06 21:49:25'),
+	(3, 20, '0', '', '2020-04-19 21:59:52', '2020-05-19 19:13:22'),
+	(3, 20, '1', '', '2020-05-29 18:41:38', '2020-05-29 18:41:38'),
+	(3, 40, '2', '001', '2020-05-29 18:42:10', '2020-06-06 21:55:23'),
+	(3, 45, '2', '002', '2020-06-06 21:52:33', '2020-06-06 21:55:52'),
+	(3, 50, '2', '003', '2020-06-06 21:56:14', '2020-06-06 21:56:14'),
+	(3, 55, '2', '004', '2020-06-06 21:56:30', '2020-06-06 21:56:30'),
+	(4, 20, '0', '', '2020-04-19 22:00:24', '2020-05-19 19:13:16'),
+	(5, 19, '0', '', '2020-05-19 20:39:58', '2020-05-19 20:39:58'),
+	(5, 19, '1', '', '2020-05-21 01:22:06', '2020-05-21 01:22:06'),
+	(5, 20, '0', '', '2020-05-21 20:57:18', '2020-05-21 20:57:18'),
+	(5, 20, '1', '', '2020-05-19 20:40:55', '2020-05-19 20:40:55'),
+	(5, 21, '2', '', '2020-05-21 20:52:05', '2020-05-21 20:52:05'),
+	(5, 22, '2', '', '2020-05-21 20:52:18', '2020-05-21 20:52:18'),
+	(5, 23, '2', '', '2020-05-21 20:52:27', '2020-05-21 20:52:27'),
+	(5, 24, '2', '', '2020-05-21 20:52:32', '2020-05-21 20:52:32'),
+	(5, 25, '2', '', '2020-05-21 20:52:39', '2020-05-21 20:52:39'),
+	(5, 30, '2', '', '2020-05-21 20:55:12', '2020-05-21 20:55:12'),
+	(5, 36, '2', '', '2020-05-21 20:53:05', '2020-05-21 20:53:05'),
+	(5, 40, '2', '', '2020-05-21 20:59:16', '2020-05-21 20:59:16'),
+	(5, 44, '2', '', '2020-05-21 20:54:46', '2020-05-21 20:54:46'),
+	(5, 47, '2', '', '2020-05-21 20:54:56', '2020-05-21 20:54:56'),
+	(5, 50, '2', '', '2020-05-21 20:53:14', '2020-05-21 20:53:14'),
+	(5, 52, '2', '', '2020-05-21 20:55:44', '2020-05-21 20:55:44'),
+	(5, 55, '2', '', '2020-05-21 20:54:38', '2020-05-21 20:54:38'),
+	(5, 57, '2', '', '2020-05-21 20:53:36', '2020-05-21 20:53:36'),
+	(5, 58, '2', '', '2020-05-21 20:55:23', '2020-05-21 20:55:23'),
+	(5, 59, '2', '', '2020-05-21 20:55:31', '2020-05-21 20:55:31'),
+	(6, 1, '2', '001', '2020-06-04 20:06:19', '2020-06-04 20:35:58'),
+	(6, 19, '0', '', '2020-06-04 20:16:15', '2020-06-04 20:16:15'),
+	(6, 20, '0', '', '2020-06-04 20:07:56', '2020-06-04 20:07:56'),
+	(6, 66, '2', '002', '2020-06-04 20:36:34', '2020-06-04 22:03:07'),
+	(6, 67, '2', '003', '2020-06-04 22:03:28', '2020-06-04 22:03:28'),
+	(6, 68, '2', '004', '2020-06-04 22:03:37', '2020-06-04 22:03:37'),
+	(6, 69, '2', '005', '2020-06-04 22:03:44', '2020-06-04 22:03:44'),
+	(6, 70, '2', '006', '2020-06-04 22:03:53', '2020-06-04 22:03:53'),
+	(6, 71, '2', '007', '2020-06-04 22:04:16', '2020-06-04 22:04:16'),
+	(6, 73, '2', '008', '2020-06-04 22:06:48', '2020-06-04 22:06:48'),
+	(6, 74, '2', '009', '2020-06-04 22:07:10', '2020-06-04 22:07:10'),
+	(6, 75, '2', '010', '2020-06-04 22:07:23', '2020-06-04 22:07:23'),
+	(6, 76, '2', '011', '2020-06-04 22:07:33', '2020-06-04 22:07:33'),
+	(6, 77, '2', '012', '2020-06-04 22:07:48', '2020-06-04 22:07:48'),
+	(6, 78, '2', '013', '2020-06-04 22:08:17', '2020-06-04 22:08:17'),
+	(6, 79, '2', '014', '2020-06-04 22:08:29', '2020-06-04 22:08:29'),
+	(6, 80, '2', '015', '2020-06-04 22:09:42', '2020-06-04 22:09:42'),
+	(6, 81, '2', '016', '2020-06-04 22:09:53', '2020-06-04 22:09:53'),
+	(6, 82, '2', '017', '2020-06-04 22:10:10', '2020-06-04 22:10:10'),
+	(6, 83, '2', '018', '2020-06-04 22:10:34', '2020-06-04 22:10:34'),
+	(6, 84, '2', '019', '2020-06-04 22:10:45', '2020-06-04 22:10:45'),
+	(6, 85, '2', '020', '2020-06-04 22:10:53', '2020-06-04 22:10:53'),
+	(6, 86, '2', '021', '2020-06-04 22:11:05', '2020-06-04 22:11:05'),
+	(6, 87, '2', '022', '2020-06-04 22:12:10', '2020-06-04 22:12:10'),
+	(6, 88, '2', '023', '2020-06-04 22:12:18', '2020-06-04 22:12:18'),
+	(6, 89, '2', '024', '2020-06-04 22:13:04', '2020-06-04 22:13:04'),
+	(6, 90, '2', '025', '2020-06-04 22:13:31', '2020-06-04 22:13:31'),
+	(6, 91, '2', '026', '2020-06-04 22:13:47', '2020-06-04 22:13:47'),
+	(6, 92, '2', '027', '2020-06-04 22:13:57', '2020-06-04 22:13:57'),
+	(6, 93, '2', '028', '2020-06-04 22:14:16', '2020-06-04 22:14:16'),
+	(6, 94, '2', '029', '2020-06-04 22:15:13', '2020-06-04 22:15:13'),
+	(6, 95, '2', '030', '2020-06-04 22:15:40', '2020-06-04 22:15:40'),
+	(6, 96, '2', '031', '2020-06-04 22:17:07', '2020-06-04 22:17:07'),
+	(6, 97, '2', '032', '2020-06-04 22:17:15', '2020-06-04 22:17:15'),
+	(6, 98, '2', '033', '2020-06-04 22:17:29', '2020-06-04 22:17:29'),
+	(6, 99, '2', '034', '2020-06-04 22:17:39', '2020-06-04 22:17:39'),
+	(6, 100, '2', '035', '2020-06-04 22:18:24', '2020-06-04 22:18:33'),
+	(6, 101, '2', '036', '2020-06-04 22:18:49', '2020-06-04 22:18:49'),
+	(6, 102, '2', '037', '2020-06-04 22:19:09', '2020-06-04 22:19:09'),
+	(6, 103, '2', '038', '2020-06-04 22:19:23', '2020-06-04 22:19:23'),
+	(6, 104, '2', '039', '2020-06-04 22:19:38', '2020-06-04 22:19:38'),
+	(6, 105, '2', '040', '2020-06-04 22:19:56', '2020-06-04 22:19:56'),
+	(6, 107, '2', '041', '2020-06-04 22:20:23', '2020-06-04 22:21:27'),
+	(6, 108, '2', '042', '2020-06-04 22:20:41', '2020-06-04 22:21:30'),
+	(6, 109, '2', '043', '2020-06-04 22:20:56', '2020-06-04 22:21:33'),
+	(6, 110, '2', '044', '2020-06-04 22:21:11', '2020-06-04 22:21:36'),
+	(6, 111, '2', '045', '2020-06-04 22:21:23', '2020-06-04 22:21:38');
+/*!40000 ALTER TABLE `evento_usuario` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.links
+CREATE TABLE IF NOT EXISTS `links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `usr_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_links_usuarios` (`usr_id`),
+  CONSTRAINT `FK_links_usuarios` FOREIGN KEY (`usr_id`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.links: ~13 rows (aproximadamente)
+/*!40000 ALTER TABLE `links` DISABLE KEYS */;
+INSERT INTO `links` (`id`, `title`, `url`, `description`, `usr_id`, `created_at`) VALUES
+	(14, 'Sony', 'http://sony.com', 'PS4\'s House', 19, '2020-04-30 20:48:39'),
+	(18, 'Oloko', 'https://gshow.globo.com/programas/domingao-do-faustao/', 'Essa fera aí meu', 20, '2020-04-30 20:57:58'),
+	(19, 'Ultrage!', 'https://www.youtube.com/user/bebadex', 'eu tinha uma galinha ...\r\n', 19, '2020-04-30 20:59:46'),
+	(21, 'Quac!', 'http://link.com', 'Sei lá!', 19, '2020-04-30 21:09:36'),
+	(22, 'TESTE GRANDE', 'http://www.americanas.com', 'OLOKinho meu..', 20, '2020-04-30 21:19:40'),
+	(24, 'Instagram', 'http://instagram.com', 'Photos Super!\r\n\r\n', 20, '2020-05-01 18:42:39'),
+	(25, 'EA Games', 'http://ea.com', 'site de jogos', 20, '2020-05-02 21:28:32'),
+	(26, 'Link Próprio', 'http://ferrari.com', 'Meu próximo', 19, '2020-05-05 22:57:11'),
+	(27, 'Cia Mun Dança', 'http://ciamunicipaldancapoa.com', 'Site Oficial da Cia Municipal de Dança de Porto Alegre / RS', 19, '2020-05-06 22:48:18'),
+	(28, 'Cia Mun Dança', 'http://ciamunicipaldancapoa.com', 'Site Oficial da Cia Municipal de Dança de Porto Alegre / RS', 20, '2020-05-06 22:55:17'),
+	(29, 'Nova Hospedagem', 'http://bmw.com', 'Sonhos ...', 19, '2020-05-16 21:19:37'),
+	(31, 'novo 3', 'http://f1.com', 'Formula 1', 19, '2020-05-18 13:34:15'),
+	(32, 'Novo 4', 'http://renner.com.br', 'lojas renner', 19, '2020-05-18 13:35:44');
+/*!40000 ALTER TABLE `links` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.notas
+CREATE TABLE IF NOT EXISTS `notas` (
+  `evt_id` int(11) NOT NULL,
+  `qst_id` int(11) NOT NULL,
+  `avl_id` int(11) NOT NULL,
+  `cdt_id` int(11) NOT NULL,
+  `nota` decimal(25,15) unsigned NOT NULL DEFAULT '0.000000000000000',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`evt_id`,`avl_id`,`cdt_id`,`qst_id`),
+  KEY `FK_notas_evento-quesito` (`evt_id`,`qst_id`),
+  KEY `FK_notas_quesitos` (`qst_id`),
+  KEY `FK_notas_usuarios_2` (`cdt_id`),
+  KEY `FK_notas_usuarios` (`avl_id`),
+  CONSTRAINT `FK_notas_evento-quesito` FOREIGN KEY (`evt_id`, `qst_id`) REFERENCES `evento_quesito` (`evt_id`, `qst_id`),
+  CONSTRAINT `FK_notas_eventos` FOREIGN KEY (`evt_id`) REFERENCES `eventos` (`id`),
+  CONSTRAINT `FK_notas_quesitos` FOREIGN KEY (`qst_id`) REFERENCES `quesitos` (`id`),
+  CONSTRAINT `FK_notas_usuarios` FOREIGN KEY (`avl_id`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `FK_notas_usuarios_2` FOREIGN KEY (`cdt_id`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.notas: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `notas` DISABLE KEYS */;
+INSERT INTO `notas` (`evt_id`, `qst_id`, `avl_id`, `cdt_id`, `nota`, `ts_new`, `ts_upd`) VALUES
+	(1, 1, 50, 56, 6.000000000000000, '2020-04-21 20:13:09', '2020-05-19 21:02:24'),
+	(1, 2, 50, 56, 7.000000000000000, '2020-05-19 20:57:09', '2020-05-19 21:02:27'),
+	(1, 3, 50, 56, 0.000000000000000, '2020-05-19 20:57:23', '2020-05-19 21:02:15'),
+	(3, 4, 19, 40, 7.000000000000000, '2020-06-06 22:03:35', '2020-06-07 12:48:30'),
+	(3, 5, 19, 40, 8.000000000000000, '2020-06-07 12:49:03', '2020-06-07 12:49:03');
+/*!40000 ALTER TABLE `notas` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.quesitos
+CREATE TABLE IF NOT EXISTS `quesitos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` char(20) NOT NULL,
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Index 2` (`descricao`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='Quesitos de avaliação de cada evento';
+
+-- Copiando dados para a tabela selector.quesitos: ~6 rows (aproximadamente)
+/*!40000 ALTER TABLE `quesitos` DISABLE KEYS */;
+INSERT INTO `quesitos` (`id`, `descricao`, `ts_new`, `ts_upd`) VALUES
+	(1, 'AULA', '2020-04-21 13:16:44', '2020-04-21 13:16:44'),
+	(2, 'IMPROVISAÇÃO', '2020-04-21 13:16:52', '2020-04-21 13:16:52'),
+	(3, 'REPERTÓRIO', '2020-04-21 13:17:11', '2020-04-21 13:17:11'),
+	(4, 'CÓDIGO', '2020-05-29 18:36:52', '2020-05-29 18:36:52'),
+	(5, 'SGBD', '2020-05-29 18:37:11', '2020-05-29 18:37:52'),
+	(6, 'GRUPO', '2020-05-29 18:37:20', '2020-05-29 18:37:20'),
+	(7, 'INFRA', '2020-05-29 18:39:35', '2020-05-29 18:39:35');
+/*!40000 ALTER TABLE `quesitos` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.resultados
+CREATE TABLE IF NOT EXISTS `resultados` (
+  `evt_id` int(11) NOT NULL,
+  `qst_id` int(11) NOT NULL,
+  `cdt_id` int(11) NOT NULL,
+  `media` decimal(25,15) unsigned NOT NULL DEFAULT '0.000000000000000',
+  `peso` decimal(6,3) unsigned NOT NULL DEFAULT '0.000',
+  `score` decimal(25,15) unsigned NOT NULL DEFAULT '0.000000000000000',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`evt_id`,`qst_id`,`cdt_id`) USING BTREE,
+  CONSTRAINT `FK_resultados_evento-quesito` FOREIGN KEY (`evt_id`, `qst_id`) REFERENCES `evento_quesito` (`evt_id`, `qst_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.resultados: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `resultados` DISABLE KEYS */;
+INSERT INTO `resultados` (`evt_id`, `qst_id`, `cdt_id`, `media`, `peso`, `score`, `ts_new`, `ts_upd`) VALUES
+	(1, 1, 50, 8.000000000000000, 1.000, 8.756000000000000, '2020-04-21 17:04:47', '2020-05-19 20:52:04'),
+	(1, 2, 53, 8.000000000000000, 2.000, 8.756000000000000, '2020-04-21 20:15:11', '2020-05-19 20:52:09'),
+	(1, 3, 22, 9.000000000000000, 2.000, 8.756000000000000, '2020-04-21 20:15:51', '2020-05-19 20:52:15');
+/*!40000 ALTER TABLE `resultados` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.sessions
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.sessions: ~146 rows (aproximadamente)
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+	('-OKVJ35oKXCbLwsyiWKMyGhYub9dGhNp', 1591708635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('04PLHP-rAdT4rUYYnBXxEGawe8UVBdMt', 1591682835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('0BpV_H4P92ihkUe6vKKIA-alrh9nNzm8', 1591669635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('2V1y74Q8MFiWNDds7y2VipGBO9lIR-wr', 1591735035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('2m-hafjX80EMjRGAqHMUc_bQq-fLypX0', 1591658835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('3_3SScG9DR3VS7YY-pxN_J-CBKdhbSb4', 1591700835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('3bt4gmitBYJMdrqn9kwmQidT8yIOdfYI', 1591714635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('3r-tLgzoWzWs3CGeHMCXpGa2ymwBA7Rz', 1591709235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('4kYgGYTSMinvgkMWC_md3Z_1GyDqbzXV', 1591669035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('4nLVUI0rRKSHo0qA32-wHwGDbkavp4l9', 1591663035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('5Nyhy8kuAfOuZyQbb-RH2oZrD-Mx_oPL', 1591681635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('5QTONPSH0CRdcTAyqhzBZsbXEwPJua5D', 1591702035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('5VpDwHUDtzealYcDllswgXvWFyJ_SNG9', 1591684035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('6yGZTaejIXjlbUjPnd3TedP6_vgWZxyM', 1591661235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('7-WPZnT6-iUfCQAxcB2gmp5PD0liyPS0', 1591657635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('8Mi2GQbksT4b9fh5yw9juNYfbrhGgC_1', 1591692435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('8WQ9vVlbXMa1g0xUigWPKf6jWDG8n77M', 1591712835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('8_yMHGuDMiJvbebw8rOGVmXkIFdDgZ0H', 1591698435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('8lpT7zM1eJUGRfNPRZrLOO25JpqqnKFP', 1591694835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('8vFn9FEJZq0R2FLXRsJHbvoRsLSw4Cn4', 1591735635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('9C4uce7dMnlexIk4AH7TAiEGAmvj3xSy', 1591727835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('9XQttoi-HShcYhYzZ5K5XjOMwNr8S-mE', 1591686435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('9kExDWXDAPgWl0_PJksTVBbMUlJKEP54', 1591678635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('A4L1T641k_lP2BlcG67Oxq0ebZYBTC3z', 1591674435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('AftrzXNJzoDlZiGLhew4ZDAqOn6dMDLL', 1591729635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('B5AmmSSifQNV8T6A3kmJ62KrUPU-W8lS', 1591726035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('B9am-2fv4g98jEAaa_cElSvdaV8Fchd6', 1591705636, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('BFr-msko7JrDmyNDia5Pdd0kJQzVxem0', 1591690635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('CVIhHq2F26tePTO-51JCFsGzwwBm9V-n', 1591729392, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ChZMol99UmSL2juaf1PCwyKnS63F8n2g', 1591655835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('D_6rh12KcikhU8CZEJJ6d85l_EfqWOHI', 1591705035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('DolPLc1qa5o4Xii2A1SEQWhL6HR-bLm0', 1591676235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ETL-NDL2lOW-bjxY1mRKaVQsnPv2IxYD', 1591689435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ETgVulaCeyGBeFiTTobMCorv1NOA5G4t', 1591675635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('EXKK2fD8H2_0Bn2w-rYxEoACujwv_rls', 1591706835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('EhgNMQJtPMhFHJb4Rlx3-V4cy0MJ2yZj', 1591681035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Ek1EJ82FF8JsgPznYcwlXyWT25nFAOTC', 1591693637, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('FOAMbQbppwLcuz-HwwkuPDV7DVzdE3Ir', 1591731435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('FUvxThJp6tXq1oNVlDPAXW29Ee_4DGm3', 1591708035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('FV4DcA0gld10oMdiMCZq0pRCU-t9eT2x', 1591732635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Fb8hOkOiyUvXACQUS9ODDVebRPeofg5e', 1591715239, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('GGltqqKOv8RvGJ__74i6zP2OaaHJYhHr', 1591671435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('I1DcFJnNNJKMLpN-Ulxz6Ki2J0xM3kjv', 1591742235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('IFeSAMvDm1TdOPypp729x6hB3l4GzXRM', 1591703235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('IN8aqfLggij89V8AWxoSukrZugnh95OO', 1591707435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('J4oQ-JMqmSQxWxH-AhlGi4y6T6mq1kHg', 1591696635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('JdH-K4yP_ZDaZ0Hi7xYz2pQPgoNd5mND', 1591697835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('JdvyUfLcqoEsbQOn7cwdwpTJmXuAnzy6', 1591720635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('KM9JspnqAzoDATIqO1GRzvFU5SZpus-g', 1591739835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('L8h7cotVx7ZQyviIlN2bgNBQlltjB175', 1591711635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('LD6eB_5jSL9sT-OTOS1m6qhywJ-xaTyZ', 1591725435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('LPtuCUl7gxp8yP-keyELFIcIThgvJxhJ', 1591685835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('LeP5NYTMX5v3Ok-AA0vYjh2WHpHakcxi', 1591729035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Lj3ZFp746ah-6k4YeXskO2An74gh4hw6', 1591676835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('MW_OjTGI6XdN_cpmq-QikLhnq1vm_byz', 1591667835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('MeAboDXtcfukUYU6tKXkc1W5b_23kNiX', 1591728435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('NSDDkAD0Bt66HL0CpViFah6cM6Nlssop', 1591738635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('OQ3np0n0Gwz_xh419q78N6oZkzPH4oDX', 1591741635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('OR3O5ktiuE8OCHgoHPSEMMINu5ht_fyi', 1591702635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ORvFokwNEhK9u1hykl8LF3IfEpbIaOWq', 1591661835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('PrDPuhzk0jHp9tgeJi5m-_J7AcEccO6y', 1591667235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QDram2DBQ57MoudOjOuEEpF_xJ1rabbi', 1591664835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QGD54Cdpv8SHC3wqtl5FqHAZEfTwrGks', 1591670835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QLlcT4HT_qIiHOp1rnWoBQZP3CAWaV4-', 1591678035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QTfSNWVOFNt2dGZAs8FhvF1t0b1nIWdg', 1591696035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QeO910n77w49Q_0IU-J-O6tRbvy2GfwO', 1591677435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('QlFIBxlyXuVS4SaYu_5dBydAhnLYrG3z', 1591723035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('R9LWmiawiTo_FZEK4zNxCwce3mxgzzY_', 1591662435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('RibrwC7MPiWJfFp_kpds1gmwREp26DU-', 1591740435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('TBkYYHFS6v99b_7dqAzDT4wa-Bb31iyz', 1591699035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('TKp_S0ThEjsKMnIjGB2m6rswpFw6n4qW', 1591714035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('TizFjvX-krsm4tBElnMaPDYnMB9M3kQM', 1591700235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('UX4e12yof75Zn8Vp5OcjAr2O56Km9Px8', 1591723635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Uitnz91C_F3lO9mkW-epCIiNVOFieBjx', 1591672035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('UyVLv4zhpZrgmGr_vhWNQ-vGhlE93AvF', 1591720035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('VUvIiGjeL4xZZPj-Kzpv2qGYlTfdpDfD', 1591684635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('VVCo4hGDIb2JGDawaw8nD4bRpAoQ4vN8', 1591660636, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('VXpCenl-B_OHyGHTgTjRH3s38V_2NccM', 1591687635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('XfdrsDatpO7BORw5mj44FF73IzXo6OtC', 1591658235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Xp8y1X915oqG-aKVqiA7C0dxuvOE_ArT', 1591680435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('XwpowE6AhxmiC5-F-Gkd-gbJQg8-0_FA', 1591717635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('YlU3vwcgpEGTORjxIDLbIEHERreuWbh3', 1591691835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('Z1QFdUQxsB-TYryN8D6v-zHW5TNpEkaC', 1591672635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ZdAzazJV5AKLcZgHH7aMvCSYwR6VWLDV', 1591733835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('_1xfFmL1TsykDRvhl9AQd4M9QChnSjSa', 1591715835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('_GLmQf-HP-Zy4p4x-iymLc1Y_qT0dnUG', 1591737435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('_ZYzb7CQQrzW3HjSgBAOxGbuNon8534v', 1591688835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('a0ld_BPUvLUw4bqZhSsjHMmrLftCqDrD', 1591724835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('a8S_IGKFzQtk-P1L-9IIvhjdfsA_Q0LB', 1591718835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('aNIOtPsA73PoJnGBnRhaWBazoQkLs1af', 1591693035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('aq76h4NX0TLiuxvRnT6BHw6kEm2ZPq8m', 1591695435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('bhweZtCFjw_VkBGBU6kZFWnYhVJwZUwT', 1591683435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('bxdPu4FCtF8ARQSVDgOfMQQng1NFn2fe', 1591703835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('c3yLx7HLU0-xEHjHxj0SpIOVabJOGz10', 1591665435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('c6hLT0blWUjIconiclcxAHaT7u4x6rCr', 1591697235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('cQk_B7LMwhlhTwc-dgd8PY--fZ1l6OP2', 1591722437, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ccXHGKY0pkNSjS1MulRpdNbTQxvVUUbx', 1591685235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('cuW3trIHq0Bsu00zKmIr3E0h6W0o7Wh2', 1591721835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('d9-icQYhzEIr6ANRTlQREm7W2xmgk459', 1591724235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('egKUiaKvIfrqsjkD090sOS__3pwe4Ejg', 1591717035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('eq6HN8T3wrjVPsw0MbQTCpBP9ZKSqsAq', 1591733235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('f1ki9MFNPpWxdb1yJtPzW1DBEQPL3HNf', 1591673835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('fE1B48PcQ8Goe--nEb_JaktAxdDqpND_', 1591730235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('fQXQl7-YOzGbRkQmvsALLqct3oR0Ol5o', 1591699635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('gFcJ8vOK9VCLSxU54Y9ihhF8WBFhGefb', 1591710435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('gHDueKv8VjZqhaMmTG3MNpwS28eJoVI9', 1591666635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('grEL96AamoGfotpWULgyr1ySfZW-_3Bz', 1591713435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('hiXhNv_MsmfBWEt40nvUPBREP8PGg_m9', 1591656435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('hpbA73oRPo4E2ALa07WURSDe5R0URTe0', 1591682235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('htfcyb4hXI2Okac9mzdM_mWMCiiShdpn', 1591732035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('jbDqir47hMmBx-NrJbH0mtJAD2IdKPye', 1591657035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('jcnK3oLxLSS51ll_uD7vE1nmYbVa902e', 1591660035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('kCaoEu06WEdaB3qZvA8D6SwfXs57JDPS', 1591736835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('kMCDVrRblfyRXBohYxNoxuJ902oTFENa', 1591675035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('lZ8IayGu-aNf5S55V0iBZy210pibi5iZ', 1591690035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('liTYoND8J6q4fZyUEoNqV1ecgBQNcobO', 1591718236, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('lvZtAnk4u9NdrKPC_L2-Nxgtz9yVSDkS', 1591730835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('mlbMrrkvTyQifMhpKpmancZ48nXID9fg', 1591734435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('n0QbSmA674m4VPUBAl-jeLCSBaeox-GN', 1591669344, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{},"passport":{"user":19}}'),
+	('oCwTQoDQvivqbAKtgTVfzbuKu3XJTU9s', 1591726635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('oTIFvZjnXrtqVpnYR0xHX61SRa7osGKu', 1591738035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('omD_lx6tH9jx968nYyWs3EE9lCjMDQhV', 1591706235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('ouV9ainqQT8tUxchZzdAq665dj4io8lW', 1591719435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('puWuSq-N1Sev-00D_Ml54AAF8tt_OhXd', 1591666035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('q0HFhOG2swd4oQpl1r4TRfFguuU_JC6F', 1591664235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('qBB5Dug161d4myJUWi60XHQeZAuQzDfT', 1591727235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('rJwB6Z-QJ1rrzRXiwLrsUY0-eB5-hBi9', 1591673235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('rTUp2oq_5l-buguGD3xTxsPpOzVTUEu_', 1591716435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('rVGdeMiC58aBosPXmXtuq5MIpm7uN4N2', 1591739235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('raYIzwmbhIG8V78vt0OavoeGzh14iv2H', 1591670235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('sE5RYihRUmqa4MFgHy9w2GULKMTLERQn', 1591663635, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('sZ1_ZS6687hZvqja2LZyPYFj5fdLDcWp', 1591688235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('t1r9oWtbrd9-PzxNNt7-BBHZ4jzCmGfb', 1591659435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('tEap9QoJQ2P7RrOORs9DpybSuHl9ek9-', 1591712235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('tKUA577K17SODelupL-UipbQSIT-e8it', 1591709835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('tLKTdJm3ui3xpAUIeUwgNTkz9RNAFqEr', 1591711035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('tigqSapK2nl2WqudsKn1PcTtI0OOwMRe', 1591741035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('urcF-SUi_nz7wvr8I4Rkoik7Qm-9kZRc', 1591679235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('uxgozNItwlaLtJ4FMfO2D1BCZC6Ap5OT', 1591694235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('v07rrkMvjxwZMIt-96Zm4z_amfsGpVp5', 1591704435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('v5GrY1MJ9E6JKrqaUjLY1CxVunRcuhmi', 1591679835, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('xQCJNZVe0dWfHnc2Hxa8Ow2lcvA9xsFf', 1591701435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('xoeceSNzXdOPEbr07eWZheqHMIGHka92', 1591687035, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('yUK9TQ1ru6GY08IekvyoiwWu4w4O7y8m', 1591736235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('yZ_R-k_31uwC6qg0o_C4FY9ajnMyDzDy', 1591668435, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('zR1IEKVoXYKzwkAZFWUAl0Hnls2dgSDP', 1591721235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+	('zX3Ojk1S052DzmLAkc1H2jDcOPv8Vjpe', 1591691235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela selector.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `senha` varchar(100) NOT NULL,
+  `admin` enum('Y','N') NOT NULL DEFAULT 'N',
+  `ts_new` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ts_upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `u_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela selector.usuarios: ~92 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `admin`, `ts_new`, `ts_upd`) VALUES
+	(1, 'Victória Bemfica Terragno', 'vic@email.com', 'vic123', 'N', '2020-06-04 20:05:35', '2020-06-04 20:05:35'),
+	(19, 'Sérgio Ferreira', 'sergioferreira.ads@gmail.com', '$2a$10$88lWR8xPFvXEzC24eUT9EuVbAMmQ1DWwGaqcU6qlxRLZmYzQnF0gG', 'Y', '2020-05-03 18:09:05', '2020-05-03 21:30:44'),
+	(20, 'Guilherme Ribeiro', 'guilherme.maribe@gmail.com', '$2a$10$wg95YgSzj9pSy0fI.Yr1S.vYTHYmH.8kFATiE8.NIOl1lFyC41HKe', 'Y', '2020-05-03 22:02:26', '2020-05-03 22:23:13'),
+	(21, 'Fabiano Reis', 'Ladislau53@live.com', '$2a$10$Fzii8xqvvMJY22ASykufquOY1F/197/IoSOpHtgiZbfRPF1xDoF7.', 'N', '2020-05-17 21:29:01', '2020-05-17 21:29:01'),
+	(22, 'Joana Carvalho', 'Larissa96@live.com', '$2a$10$AoZzS9AaLf0O1hAFWhUEdOXi13Vu3S4JiQW4ScZkPlyb5xvn0cnmC', 'N', '2020-05-17 21:29:22', '2020-05-17 21:29:22'),
+	(23, 'Danilo Santos', 'Warley.Costa30@yahoo.com', '$2a$10$6BjpG74ppiZxfckGle/uWub/RMDN5ah4TSxGtVJdupr8il8BV1KPG', 'N', '2020-05-17 21:31:46', '2020-05-17 21:31:46'),
+	(24, 'Sirineu Pereira', 'Sulen.Batista91@gmail.com', '$2a$10$UAb4z/K0r3K501pwIfTGN.62oPtERWtGqYC5w1EEUqdiYrYi6sKbu', 'N', '2020-05-17 21:32:01', '2020-05-17 21:32:01'),
+	(25, 'Felícia Souza', 'Guilherme16@gmail.com', '$2a$10$2NStn817lmTj7XCps7ZvJuUQ1B6cB8bMOpYl52uvtHpcZ7Z0Z7iWS', 'N', '2020-05-17 21:32:08', '2020-05-17 21:32:08'),
+	(26, 'Paula Carvalho', 'Nbia.Batista85@yahoo.com', '$2a$10$mKu6A5qJHnPsFCKAJybVAupbnnOqNzrg1znrOhi1cmdSeACy47CGG', 'N', '2020-05-17 21:32:17', '2020-05-17 21:32:17'),
+	(27, 'Isabel Moreira', 'Lucas88@live.com', '$2a$10$GVq8gSow7g7tA2GuZaE4MeIpKTNx40fOC4npR8wrG8ez8VI5eeO.i', 'N', '2020-05-17 21:32:25', '2020-05-17 21:32:25'),
+	(28, 'Danilo Carvalho', 'Vitria.Franco29@gmail.com', '$2a$10$44WW4e/.XfBuTSJoznHMjOUmJ0sz0OT5mFniUR2wB/LfeNvw5z5hu', 'N', '2020-05-17 21:32:32', '2020-05-17 21:32:32'),
+	(29, 'Margarida Macedo', 'Washington15@bol.com.br', '$2a$10$uHH9KQcdW34WBLZTjjANv.lumSPiiTANwxkPZbE//DRK6FadzHY.e', 'N', '2020-05-17 21:32:50', '2020-05-17 21:32:50'),
+	(30, 'Raul Xavier', 'Fabiano12@hotmail.com', '$2a$10$UK4tq0ePwu/1Qk5wh.3EUefzmmBfUEK3HaMH3qATA4Ym0E7Yf.ReS', 'N', '2020-05-17 21:33:34', '2020-05-17 21:33:34'),
+	(31, 'Rafael Silva', 'Gbio_Nogueira93@hotmail.com', '$2a$10$M.iL8pgpWkXcPZ31QHHTYet88faLLOHb/qF7B1rY45GznylQT5sj6', 'N', '2020-05-17 21:34:16', '2020-05-17 21:34:16'),
+	(32, 'Marli Dias Ferreira', 'Slvia_Xavier81@yahoo.com', '$2a$10$PaktNKVdGsQKVxpytNhZ1uIo7encLeHI8YnWWQh.Bmj2Bywpjo1Pu', 'N', '2020-05-17 21:34:30', '2020-05-17 21:38:36'),
+	(33, 'Vicente Macedo', 'Marcelo91@live.com', '$2a$10$CBgalhVp9QcZWE8jLiggTuJpPHncDzTdqCApGnY6LBV4Zs8xadzSq', 'N', '2020-05-17 21:34:37', '2020-05-17 21:35:02'),
+	(34, 'Norberto Vasconcelos', 'Yango.Barros@bol.com.br', '$2a$10$bsQjLgpI7eCmpRFG8RAZdeAXCnUYrcuNHzSo5EeAXaovQScVbyzAe', 'N', '2020-05-17 21:35:33', '2020-05-17 21:37:28'),
+	(35, 'Mércia Moraes', 'Pedro.Souza@hotmail.com', '$2a$10$L.hEFZjc173iyXiQobItpeya1DyhINhGlnIC/AgF2EFxcfLdquy7y', 'N', '2020-05-17 21:35:40', '2020-05-17 21:35:40'),
+	(36, 'Karla Macedo', 'Eduardo.Xavier@yahoo.com', '$2a$10$HRUrr3aEvOdVur5kn2Cm5OvhYhwJzNg5eo9q67mf41dFcLbjxM9Um', 'N', '2020-05-17 21:35:47', '2020-05-17 21:35:47'),
+	(37, 'Silas Xavier Filho', 'Meire76@bol.com.br', '$2a$10$Wka.s5ekDE2TCPiE6Aj/e.toZNPG5FAqEyApHRpPCsgu50MsNEF0i', 'N', '2020-05-17 21:36:31', '2020-05-17 21:36:31'),
+	(38, 'Salvador Reis', 'Sirineu.Nogueira92@gmail.com', '$2a$10$B9nJ.pMJnhoMHsKTW5AMqOSItMUaOlXsvNq/XMODuVxVYmAkNzQKO', 'N', '2020-05-17 21:36:43', '2020-05-17 21:36:43'),
+	(39, 'Cecília Batista', 'Jlia10@yahoo.com', '$2a$10$OpoSHwP0riaMQXPz4KQIfuEbmmS6dBT.MdtqcRrz4gmYYeFWRNGky', 'N', '2020-05-17 21:36:52', '2020-05-17 21:36:52'),
+	(40, 'Paulo Albuquerque', 'Hlio_Souza@gmail.com', '$2a$10$hIvcs6NMryqJhljNIeVrcO9ryV5EvAf4WcNtibwn1pLpwXFGv/jo.', 'N', '2020-05-17 21:37:07', '2020-05-17 21:37:07'),
+	(41, 'Tertuliano Nogueira', 'Paulo.Melo83@yahoo.com', '$2a$10$tLku6qORoH6bzPCyuZLDTOzetyeR4Hc5Ye6LHkNU8aGkYtkAM4NQe', 'N', '2020-05-17 21:39:01', '2020-05-17 21:39:01'),
+	(42, 'Célia Braga', 'Morgana.Franco@gmail.com', '$2a$10$8p0g6JZa8zq0YkonCOB.TuW/ySWMZE1QaoT3if6.qLwZSQcJHTD1K', 'N', '2020-05-17 21:39:32', '2020-05-17 21:39:32'),
+	(43, 'Breno Martins', 'Silas52@live.com', '$2a$10$khtEdZVXgDtxP5PcpE.a2eCGkjbPBSs//atqSr/xTZ1xk8dl5UF.S', 'N', '2020-05-17 21:40:06', '2020-05-17 21:40:06'),
+	(44, 'Maria Carvalho', 'Deneval16@live.com', '$2a$10$djKYUFhkMAt4L.79eqgA2OrcOGZ4woZgRt/rdXXDafwC/cYDIBz1q', 'N', '2020-05-17 21:40:18', '2020-05-17 21:40:18'),
+	(45, 'Joana Pereira', 'Janana.Batista@hotmail.com', '$2a$10$fmcx7SnPUFmdgI0QhLIOOO5Q0FPhFQweo/Rmkgtmr9yng5QZLFieG', 'N', '2020-05-17 21:41:20', '2020-05-17 21:41:20'),
+	(46, 'João Santos', 'Heitor46@yahoo.com', '$2a$10$deN/.RtQ8tzEDAsqTEdgmO0A1294k1vxwSHf2mbcVmiS9E7dOpaCe', 'N', '2020-05-17 21:41:34', '2020-05-17 21:41:34'),
+	(47, 'Sílvia Silva', 'Elsio.Xavier@live.com', '$2a$10$tJbUPiK0agO2ffobg8TmVeLIomNkE.5kv/TumXicN9gSQvZn.LTr6', 'N', '2020-05-17 21:43:03', '2020-05-17 21:43:03'),
+	(48, 'Janaína Carvalho', 'Jlia_Oliveira@live.com', '$2a$10$quTErXy97iFJdHG1TBY9auPV/TKzSVg/SWQgoRPAbvmJcfAYvxx2a', 'N', '2020-05-17 21:43:32', '2020-05-17 21:43:32'),
+	(49, 'Deneval Saraiva', 'Frederico97@live.com', '$2a$10$HgI2iwrJAeB0/2qwJT07DOH/BOJAFV8n2T5sqnNqARE81mHB8HFN2', 'N', '2020-05-17 21:43:54', '2020-05-17 21:43:54'),
+	(50, 'Vitória Oliveira', 'Eduardo75@bol.com.br', '$2a$10$o/Y.Q8GvJPiDPpbMarkpMuCBjxqOJzw1rUhDR78sgsSELG/RXFjzO', 'N', '2020-05-17 21:44:27', '2020-05-17 21:44:27'),
+	(51, 'Frederico Albuquerque Filho', 'Isabela88@hotmail.com', '$2a$10$ueGA3b4JeqoBZFlKeoDqPOk.hsNebEpatahX8ROjGxicoYZPVB1ui', 'N', '2020-05-17 21:44:55', '2020-05-17 21:44:55'),
+	(52, 'Núbia Oliveira', 'Frederico33@live.com', '$2a$10$YF6VXJz.45RyfR80O7cupe4hjiTSUOe16QsQAW7YEe7aJC2VPlI7i', 'N', '2020-05-17 21:45:05', '2020-05-17 21:45:05'),
+	(53, 'Suélen Martins Costa', 'Silas.Batista@hotmail.com', '$2a$10$kmxeUIBXtGcOSK9.HujuxuwJX9SQlaEiJGRxek38f8RIdYNScB0yO', 'N', '2020-05-17 21:45:22', '2020-05-17 21:45:22'),
+	(54, 'Júlio César Oliveira', 'Roberto_Carvalho@gmail.com', '$2a$10$z/DcKM2c/rfJQ3V2kd6qrullK5/Q8g0bIGuqUWMMYW/45V5T4khTa', 'N', '2020-05-17 22:25:26', '2020-05-17 22:25:26'),
+	(55, 'Fabiano Barros', 'Antnio_Melo69@gmail.com', '$2a$10$VAMD6oFu/S7ZzI57zzGgC.L7BTtdnmorRu8Ho2J3uIjnRBLs4Ta8C', 'N', '2020-05-17 22:25:44', '2020-05-17 22:25:44'),
+	(56, 'Roberto Pereira', 'Jlio_Carvalho@yahoo.com', '$2a$10$FIJYb/ZQtdKbs1UWSxoLoe9ePu8SrvPlxDpECsPxk0bCaCxycfYk6', 'N', '2020-05-17 22:25:53', '2020-05-17 22:25:53'),
+	(57, 'Humberto Martins Mello', 'Marli.Macedo@hotmail.com', '$2a$10$A5uX/3xD7ssXAThcpadOZu5wFPAYozvekKcuMff5VrwEmbmb4bUz2', 'N', '2020-05-18 23:07:27', '2020-05-19 20:29:56'),
+	(58, 'Marcelo Oliveira', 'Dalila98@bol.com.br', '$2a$10$6T7.QYka6fFhI/8apAT//eEhk1bBh57ChtKa54uC43pQz2mXaz5xS', 'N', '2020-05-18 23:07:34', '2020-05-18 23:07:34'),
+	(59, 'Antônio Costa', 'Carlos.Macedo@live.com', '$2a$10$kQ8E.hK6bex5upBY8V88we7tnXv2qfD45WR0lA5Kx7gRm8a.De6ja', 'N', '2020-05-18 23:10:08', '2020-05-18 23:10:08'),
+	(60, 'Isabela Souza', 'Marli_Franco27@gmail.com', '$2a$10$M6pN.kQBzarCj8xI9C4u0e5sPhq/666anHmDN2m7aXXYBbdKGvQGS', 'N', '2020-05-21 20:59:41', '2020-05-21 20:59:41'),
+	(61, 'Raul Souza', 'Maria_Martins35@yahoo.com', '$2a$10$qsS6qDtAOxfiXyN1we2B7.anwMX8wbmvO00yUcEO.hr.flVOlMKQq', 'N', '2020-05-21 20:59:52', '2020-05-21 20:59:52'),
+	(62, 'Dr. Sirineu Moraes', 'Fbio.Batista@gmail.com', '$2a$10$yDqAPiaeW4IT7phVFk6S3O6FnG7U1bndRVgrnUo0pCTvXIBuck7hy', 'N', '2020-05-21 20:59:58', '2020-05-21 20:59:58'),
+	(63, 'Cecília Santos', 'Rafael.Souza14@live.com', '$2a$10$zVCFxnr0uwp14tkeiYrO2uUoHWKse0.sz6I547rN5g6hjOK5fgUWa', 'N', '2020-05-21 21:00:03', '2020-05-21 21:00:03'),
+	(64, 'Félix Saraiva', 'Meire67@hotmail.com', '$2a$10$.ZR8Yvx5txAT5WEG/e8OOelQNHR1vjlT.ekB8Mz0DHVITNc8s3eIe', 'N', '2020-05-22 12:21:30', '2020-05-22 12:21:30'),
+	(65, 'Margarida Braga', 'Gbio49@bol.com.br', '$2a$10$B1Qf2ZvR/4xA.olTMR9K.etWXjBv/g2kwVW.EmeXQ0yL8IWasLjN6', 'N', '2020-05-28 22:17:31', '2020-05-28 22:17:31'),
+	(66, 'Everton Nunes', 'eve@email.com', 'eve123', 'N', '2020-06-04 21:04:31', '2020-06-04 21:04:31'),
+	(67, 'Adriano Oliveira Soares', 'adri@email.com', 'adri123', 'N', '2020-06-04 21:05:25', '2020-06-04 21:05:25'),
+	(68, 'Jeferson de Oliveira Cabral', 'jef@email.com', 'jef123', 'N', '2020-06-04 21:08:10', '2020-06-04 21:08:10'),
+	(69, 'Andreza Jamily da Silva Borges', 'and@email.com', 'and123', 'N', '2020-06-04 21:08:42', '2020-06-04 21:08:42'),
+	(70, 'Samuel Elias Rodrigues', 'sam@email.com', 'sam123', 'N', '2020-06-04 21:09:17', '2020-06-04 21:09:17'),
+	(71, 'Aline Zeferino dos Santos', 'ali@email.com', 'ali123', 'N', '2020-06-04 21:09:43', '2020-06-04 21:09:43'),
+	(73, 'Andressa Laís Nunes Pereira', 'andr@email.com', 'and123', 'N', '2020-06-04 21:10:16', '2020-06-04 21:10:16'),
+	(74, 'Morena Goveia dos Anjos', 'mor@email.com', 'mor123', 'N', '2020-06-04 21:10:31', '2020-06-04 21:10:58'),
+	(75, 'Marianna Kelly Silva Aires', 'mar@email.com', 'mar123', 'N', '2020-06-04 21:11:29', '2020-06-04 21:11:29'),
+	(76, 'Greta Bassolli', 'gre@email.com', 'gre123', 'N', '2020-06-04 21:11:34', '2020-06-04 21:12:01'),
+	(77, 'Gabriela Castro dos Santos', 'gab@email.com', 'gab123', 'N', '2020-06-04 21:12:19', '2020-06-04 21:12:19'),
+	(78, 'Fernando Adriel de Oliveira Queiroz', 'fer@email.com', 'fer123', 'N', '2020-06-04 21:12:32', '2020-06-04 21:12:47'),
+	(79, 'Caléo Alencar Costa', 'cal@email.com', 'cal123', 'N', '2020-06-04 21:13:06', '2020-06-04 21:13:06'),
+	(80, 'Giovanna Carvalho Fanganiello Almeida Vilas Boas', 'gio@email.com', 'gio123', 'N', '2020-06-04 21:15:31', '2020-06-04 21:15:31'),
+	(81, 'Andrew Nunes Tassinari', 'andrew@email.com', 'and123', 'N', '2020-06-04 21:16:29', '2020-06-04 21:16:29'),
+	(82, 'Thiago Cunha dos Santos', 'thi@email.com', 'thi123', 'N', '2020-06-04 21:16:54', '2020-06-04 21:16:54'),
+	(83, 'Pamela Grazielle Agostini', 'pam@email.com', 'pam123', 'N', '2020-06-04 21:18:18', '2020-06-04 21:18:18'),
+	(84, 'Mauricio de Oliveira Miranda', 'mau@email.com', 'mau123', 'N', '2020-06-04 21:52:57', '2020-06-04 21:52:57'),
+	(85, 'Juliana Teixeira Coutinho', 'jul@email.com', 'jul123', 'N', '2020-06-04 21:53:17', '2020-06-04 21:53:17'),
+	(86, 'Richard Araujo Salles', 'ric@email.com', 'ric123', 'N', '2020-06-04 21:53:36', '2020-06-04 21:53:36'),
+	(87, 'Fellipe Santos Resende', 'fel@email.com', 'fel123', 'N', '2020-06-04 21:54:01', '2020-06-04 21:54:01'),
+	(88, 'Jonas Hory Matsumoto', 'jon@email.com', 'jon123', 'N', '2020-06-04 21:54:35', '2020-06-04 21:54:35'),
+	(89, 'Bruna Rodrigues Ketzer', 'bru@email.com', 'bru123', 'N', '2020-06-04 21:54:58', '2020-06-04 21:54:58'),
+	(90, 'Caroline Narciso Fossá', 'car@email.com', 'car123', 'N', '2020-06-04 21:55:16', '2020-06-04 21:55:16'),
+	(91, 'Júlia Finkler Schneider', 'juli@email.com', 'jul123', 'N', '2020-06-04 21:55:41', '2020-06-04 21:55:41'),
+	(92, 'Alice Coward Fogliatto', 'alic@email.com', 'ali123', 'N', '2020-06-04 21:56:01', '2020-06-04 21:56:01'),
+	(93, 'Rafaela Winter', 'raf@email.com', 'raf123', 'N', '2020-06-04 21:56:24', '2020-06-04 21:56:24'),
+	(94, 'Kynaê Primon Narciso', 'kyn@email.com', 'kyn123', 'N', '2020-06-04 21:56:48', '2020-06-04 21:56:48'),
+	(95, 'Leonardo Maia Moreira', 'leo@email.com', 'leo123', 'N', '2020-06-04 21:57:05', '2020-06-04 21:57:05'),
+	(96, 'Camila Costamilan Schlichting', 'cam@email.com', 'cam123', 'N', '2020-06-04 21:57:24', '2020-06-04 21:57:24'),
+	(97, 'Vanessa Maciel Silveira', 'van@email.com', 'van123', 'N', '2020-06-04 21:57:42', '2020-06-04 21:57:42'),
+	(98, 'Pâmella Saldanha Kepler Corrêa\r\n\r\n', 'pame@email.com', 'pam123', 'N', '2020-06-04 21:57:59', '2020-06-04 21:57:59'),
+	(99, 'Lucas Tossi Rigelo', 'luc@email.com', 'luc123', 'N', '2020-06-04 21:58:17', '2020-06-04 21:58:17'),
+	(100, 'Gracielli Lattuada Alves', 'gra@email.com', 'gra123', 'N', '2020-06-04 21:58:42', '2020-06-04 21:58:42'),
+	(101, 'Cecilia Cherem Castilho', 'cec@email.com', 'cec123', 'N', '2020-06-04 21:58:57', '2020-06-04 21:58:57'),
+	(102, 'Pietra Sehn Assmus', 'pie@email.com', 'pie123', 'N', '2020-06-04 21:59:12', '2020-06-04 21:59:12'),
+	(103, 'Roberto Lauermann Val', 'rob@email.com', 'rob123', 'N', '2020-06-04 21:59:35', '2020-06-04 21:59:35'),
+	(104, 'Camila Lemos Naud de Moura', 'camil@email.com', 'cam123', 'N', '2020-06-04 21:59:49', '2020-06-04 21:59:49'),
+	(105, 'Raquel Vidal Coelho', 'raq@email.com', 'raq123', 'N', '2020-06-04 22:00:10', '2020-06-04 22:00:10'),
+	(107, 'Marcela Cintra Santos', 'marc@email.com', 'mar123', 'N', '2020-06-04 22:00:29', '2020-06-04 22:00:29'),
+	(108, 'Paula Barcellos Finn', 'paul@email.com', 'pau123', 'N', '2020-06-04 22:00:53', '2020-06-04 22:00:53'),
+	(109, 'Melissa Salgado', 'mel@email.com', 'mel123', 'N', '2020-06-04 22:01:10', '2020-06-04 22:01:10'),
+	(110, 'Stephanie dos Santos Cardoso', 'ste@email.com', 'ste123', 'N', '2020-06-04 22:01:26', '2020-06-04 22:01:26'),
+	(111, 'Kleommarny Santana de Carvalho', 'kle@email.com', 'kle123', 'N', '2020-06-04 22:01:51', '2020-06-04 22:01:51');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

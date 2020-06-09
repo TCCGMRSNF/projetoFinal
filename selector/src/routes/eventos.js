@@ -27,9 +27,14 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     const evento = await pool.query(
         'SELECT * FROM eventos WHERE id = ? limit 1', [sId]);
 
-    const quesitos = await pool.query(
+/*  Usar o helper a ser criado para chamar os quesitos ----
+        const quesitos = await pool.query(
         'SELECT * FROM quesitos WHERE id IN(SELECT qst_id FROM evento_quesito WHERE evt_id = ?)'
         , [sId]);
+*/
+
+            const quesitos = [];
+
 
     const avaliadores = await pool.query(
         'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "1")'
@@ -68,7 +73,7 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
         'SELECT * FROM notas WHERE evt_id = ? AND avl_id = ?'
         , [sId, sAvl]);
 
-    candidatos = preparaGridNotas(candidatos, quesitos, notas);
+//    candidatos = preparaGridNotas(candidatos, quesitos, notas);
 
     //   console.log(candidatos);
     //   console.log(quesitos);
