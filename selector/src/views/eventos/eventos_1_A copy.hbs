@@ -1,0 +1,144 @@
+{{!--     <a>|{{quesitos.[0].descricao}}|</a>  --}}
+
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-5">
+            <div class="alert alert-info" role="alert">
+                <a href="javascript: history.go(-1)" class="alert-link">AVALIADOR</a>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="alert alert-secondary" role="alert">
+                <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="input-group">
+  <select class="custom-select" id="btnOK">
+    <option selected>Selecione um QUESITO...</option>
+    <option value="1">Um</option>
+    <option value="2">Dois</option>
+    <option value="3">Três</option>
+  </select>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" onclick="func1()">OK</button>
+  </div>
+</div>
+
+<div id="minhaDiv" class="container mt-3 text-center">
+
+<i class="fas fa-sync-alt fa-3x fa-spin"></i>
+</div>
+
+
+
+<button type="button" onclick="Mudarestado('minhaDiv')">Mostrar / Esconder</button>
+
+ <br>
+
+
+
+
+
+<script>
+
+function Mudarestado(el) {
+        var display = document.getElementById(el).style.display;
+        if(display == "none")
+            document.getElementById(el).style.display = 'block';
+        else
+            document.getElementById(el).style.display = 'none';
+    }    
+
+function func1() {
+    console.log('Clicado');
+    var comboCidades = document.getElementById("btnOK");
+    console.log("O indice é: " + comboCidades.selectedIndex);
+    console.log("O texto é: " + comboCidades.options[comboCidades.selectedIndex].text);
+    console.log("A chave é: " + comboCidades.options[comboCidades.selectedIndex].value);
+
+}
+
+
+$(document).ready(function(){
+
+
+});
+
+</script>
+
+
+{{!--
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne">
+                        <strong>Quesito: AULA</strong>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        <strong>Quesito: REPERTÓRIO</strong>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        <strong>Quesito: IMPROVISAÇÃO</strong>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+
+    </div>
+ --}}

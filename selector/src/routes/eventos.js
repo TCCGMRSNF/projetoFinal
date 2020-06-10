@@ -40,10 +40,16 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
         'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "1")'
         , [sId]);
 
-    var candidatos = await pool.query(
-        'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
-        , [sId]);
+/*
+        var candidatos = await pool.query(
+            'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
+            , [sId]);
+*/
 
+    var candidatos = await pool.query(
+        'SELECT * FROM evento_usuario AS eu, usuarios AS us, notas AS nt WHERE eu.evt_id = ? AND eu.funcao = "2" AND eu.usr_id = us.id AND (nt.cdt_id=eu.usr_id AND nt.evt_id = ? AND nt.avl_id = ?)'
+        , [sId, sId, sAvl]);
+    
     const rota = 'eventos/eventos_' + funcao.toString() + '_A';
 
 
@@ -75,7 +81,7 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
 
 //    candidatos = preparaGridNotas(candidatos, quesitos, notas);
 
-    //   console.log(candidatos);
+      console.log(candidatos);
     //   console.log(quesitos);
     //   console.log('Notas---------------------');
     //   console.log(notas);
