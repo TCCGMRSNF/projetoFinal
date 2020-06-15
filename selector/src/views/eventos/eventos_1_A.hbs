@@ -1,64 +1,146 @@
 {{!--     <a>|{{quesitos.[0].descricao}}|</a>  --}}
 
-
-
 <div class="container mt-3">
-    <div class="row">
-        <div class="col-5">
-            <div class="alert alert-info" role="alert">
-                <a href="javascript: history.go(-1)" class="alert-link">AVALIADOR</a>
-            </div>
-        </div>
-        <div class="col-7">
-            <div class="alert alert-secondary" role="alert">
-                <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-5">
+      <div class="alert alert-info" role="alert">
+        <a href="javascript: history.go(-1)" class="alert-link">AVALIADOR</a>
+      </div>
     </div>
+    <div class="col-7">
+      <div class="alert alert-secondary" role="alert">
+        <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="container mt-3">
-        <div class="col-sm">
-            <div class="input-group">
-                <input class="form-control" id="busca" type="search" autofocus placeholder="Buscar Evento ...">
-                <span class="input-group-append">
-                    <div class="input-group-text bg-secondary bordered"><i
-                            class="fa fa-search bg-secondary text-warning"></i></div>
-                </span>
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <div class="input-group">
+        <input class="form-control" id="busca" type="search" autofocus placeholder="Busca ...">
+        <span class="input-group-append">
+          <div class="input-group-text bg-secondary bordered"><i class="fa fa-search bg-secondary text-warning"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="selQuesito">Quesito</label>
         </div>
+        <select class="custom-select" id="selQuesito" onchange="teste()">
+          {{#each quesitos}}
+          <option value={{@index}}>{{descricao}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
 
+{{!-- Table --}}
+<div class="container">
+  <div class="mt-3 table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped table-sm table-hover mb-0">
+      <thead>
+        <tr>
+          <th class="text-center">Núm</th>
+          <th>Nome</th>
+          {{#each quesitos}}
+          <th class="text-center">{{descricao}}</th>
+          {{/each}}
 
-        {{!-- Table --}}
-        <div class="mt-3 table-wrapper-scroll-y my-custom-scrollbar">
-            <table class="table table-bordered table-striped table-sm table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th class="text-center">Núm</th>
-                        <th>Nome</th>
-                        <th class="text-center">Quesito 01</th>
-                        <th class="text-center">Quesito 02</th>
-                        <th class="text-center">Quesito 03</th>
-                        <th class="text-center">Quesito 04</th>
-                        <th class="text-center">Quesito 05</th>
-                    </tr>
-                </thead>
-                <tbody id="grid">
-                    {{#each candidatos}}
-                    <tr>
-                        <td class="text-center">{{numero}}</td>
-                        <td>
-                            <a href="#" class="snf-link1">{{nome}}</a>
+        </tr>
+      </thead>
+      <tbody id="grid">
+        {{#each candidatos}}
+        <tr>
+          <td class="text-center">{{numero}}</td>
+          <td>
+            <!--              <a href="javascript:void(0)" class="snf-link1" onclick="abreModal({{@index}});">{{@index}}:{{nome}}</a>  -->
+            <a href="javascript:void(0)" class="snf-link1" onclick="abreModal({{@index}});">{{@index}}:{{nome}}</a>
+          </td>
+          {{!--                        
+                        <td class="text-right">
+                       <input type="number" id="nota01" name="nota01" min="0" max="10000" step="0.01" value={{nota01}}> 
                         </td>
-                        <td class="text-right">{{nota01}}</td>
-                        <td class="text-right">{{nota02}}</td>
-                        <td class="text-right">{{nota03}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+--}}
+          {{#each notas}}
+          <td class="text-center">{{@index}}: {{this}}</td>
+          {{/each}}
+
+          {{!--            <td class="text-center">{{nota01}}</td>
+            <td class="text-center">{{nota02}}</td>
+--}}
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong>Evento:<br> {{evento.descricao}}</strong>
+      </div>
+      <div class="modal-body">
+
+        <div class="alert alert-primary" role="alert">
+          <strong>
+            <h2>Quesito: Código</h2>
+          </strong>
         </div>
+
+        <div class="alert alert-success" role="alert">
+          <strong>
+            <h1>102</h1>
+            <h5>Dagoberto Fernandes Silva</h5>
+          </strong>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Nota:</h1>
+            <form action="#">
+              <h1><input type="number" id="modalNota" name="modalNota" value=0></h1>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success">Salvar</button>
+      </div>
     </div>
+  </div>
+</div>
 
 
 
-    {{> script_grid_filter}}
+
+
+{{> script_grid_filter}}
+
+
+<script>
+  function teste() {
+    console.log(document.getElementById("selQuesito").value);
+
+  }
+
+  function abreModal(ix) {
+    //    document.getElementById("modalTitle1").innerHTML = evento[0].descricao;
+    $('#exampleModalCenter').modal('show');
+
+  }
+
+</script>

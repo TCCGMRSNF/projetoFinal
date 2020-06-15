@@ -24,77 +24,80 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
     const sId = id.toString();
     const sAvl = req.user.id.toString();
 
-    const evento = await pool.query(
+    var evento = await pool.query(
         'SELECT * FROM eventos WHERE id = ? limit 1', [sId]);
-
-/*  Usar o helper a ser criado para chamar os quesitos ----
-        const quesitos = await pool.query(
-        'SELECT * FROM quesitos WHERE id IN(SELECT qst_id FROM evento_quesito WHERE evt_id = ?)'
-        , [sId]);
-*/
-
-            const quesitos = [];
-
 
     const avaliadores = await pool.query(
         'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "1")'
         , [sId]);
 
-/*
-        var candidatos = await pool.query(
-            'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
-            , [sId]);
-*/
+    /*
+            var candidatos = await pool.query(
+                'SELECT * FROM usuarios WHERE id IN(SELECT usr_id FROM evento_usuario WHERE evt_id = ? and funcao = "2")'
+                , [sId]);
+    */
 
     var candidatos = await pool.query(
         'SELECT * FROM evento_usuario AS eu, usuarios AS us, notas AS nt WHERE eu.evt_id = ? AND eu.funcao = "2" AND eu.usr_id = us.id AND (nt.cdt_id=eu.usr_id AND nt.evt_id = ? AND nt.avl_id = ?)'
         , [sId, sId, sAvl]);
+
+        const quesitos = await getQuesitos(sId);
     
+        candidatos = criaNotas(candidatos, evento[0].qtd_ques);
+
     const rota = 'eventos/eventos_' + funcao.toString() + '_A';
 
 
-    /*
-        for (i = 0; i < candidatos.length; i++) {
-            var sCand = candidatos[i].id.toString();
-            var ret = fillArrayNotas(sId, sAvl, sCand, quesitos);  
-            console.log(candidatos[i].id, candidatos[i].nome, ret);
-            candidatos[i].notas = ret;
-    //        console.log(candidatos[i]);
-        }
-    
-    */
-
-    //    fillArrayNotas(sId, sAvl, quesitos, candidatos)
-
-    /* 
-        console.log(evento);
-        console.log(sId);
-        console.log(quesitos);
-        console.log(avaliadores);
-        console.log(req.user);
-    */
-
-
-    const notas = await pool.query(
-        'SELECT * FROM notas WHERE evt_id = ? AND avl_id = ?'
-        , [sId, sAvl]);
-
-//    candidatos = preparaGridNotas(candidatos, quesitos, notas);
-
-      console.log(candidatos);
-    //   console.log(quesitos);
+    console.log(candidatos);
+    console.log(quesitos);
+    console.log(evento);
     //   console.log('Notas---------------------');
     //   console.log(notas);
 
 
     res.render(rota, { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
-
-
-
 });
 
+function criaNotas(candidatos, nQues) {
+    candidatos.forEach((can) => {
+        can.notas = [];
+        for (var i = 0; i < nQues; i++) {
+            var cVar = 'can.nota' + ('0'+i).slice(-2);
+            console.log(cVar);
+            can.notas[i] = eval(cVar);
+        }
+    
+    });
+    return (candidatos);
+
+
+
+
+}
+
+async function getQuesitos(evtId) {
+    const quesitos = await pool.query(
+        'SELECT * FROM quesitos AS ques, evento_quesito AS eq WHERE eq.evt_id = ? AND eq.qst_id = ques.id'
+        , [evtId]);
+    return (quesitos);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function preparaGridNotas(candidatos, quesitos, notas) {
-//    var xNotas = [];
+    //    var xNotas = [];
 
     candidatos.forEach((can) => {
         can.notas = [];
@@ -104,21 +107,21 @@ function preparaGridNotas(candidatos, quesitos, notas) {
     });
 
     // Inserir as notas no candidato e quesito correto ----------
-        notas.forEach((nt, index) => {
-    
-            var i_qst = quesitos.findIndex((ques, index, array) => ques.id === nt.qst_id);
-            console.log('Ind Quesito: ', i_qst);
-    
-            var i_can = candidatos.findIndex((cand, index, array) => cand.id === nt.cdt_id);
-            console.log('Ind Candidato: ', i_can);
-    
-            console.log(candidatos[i_can].notas);
-            console.log('Nota: ', nt.nota);
-            candidatos[i_can].notas[i_qst] = nt.nota;
-            //            candidatos[i_can].notas[i_qst] = nt.nota;
-    
-        });
-        console.log(candidatos);
+    notas.forEach((nt, index) => {
+
+        var i_qst = quesitos.findIndex((ques, index, array) => ques.id === nt.qst_id);
+        console.log('Ind Quesito: ', i_qst);
+
+        var i_can = candidatos.findIndex((cand, index, array) => cand.id === nt.cdt_id);
+        console.log('Ind Candidato: ', i_can);
+
+        console.log(candidatos[i_can].notas);
+        console.log('Nota: ', nt.nota);
+        candidatos[i_can].notas[i_qst] = nt.nota;
+        //            candidatos[i_can].notas[i_qst] = nt.nota;
+
+    });
+    console.log(candidatos);
 
     // Return da função -------------------
     return (candidatos);
@@ -195,7 +198,44 @@ function xyz(idEvt, idAvl, quesitos, candidatos) {
 
 
 
+
+
+
 /*=====================================================================*/
+// Códigos não utilizados
+
+    /*
+        for (i = 0; i < candidatos.length; i++) {
+            var sCand = candidatos[i].id.toString();
+            var ret = fillArrayNotas(sId, sAvl, sCand, quesitos);  
+            console.log(candidatos[i].id, candidatos[i].nome, ret);
+            candidatos[i].notas = ret;
+    //        console.log(candidatos[i]);
+        }
+    
+    */
+
+    //    fillArrayNotas(sId, sAvl, quesitos, candidatos)
+
+    /* 
+        console.log(evento);
+        console.log(sId);
+        console.log(quesitos);
+        console.log(avaliadores);
+        console.log(req.user);
+    */
+
+    //    candidatos = preparaGridNotas(candidatos, quesitos, notas);
+
+
+/*
+    const notas = await pool.query(
+        'SELECT * FROM notas WHERE evt_id = ? AND avl_id = ?'
+        , [sId, sAvl]);
+*/
+
+
+
 
 
 /*
