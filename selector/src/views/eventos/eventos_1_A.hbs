@@ -29,7 +29,7 @@
     <div class="col-7">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <label class="input-group-text" for="selQuesito">Quesito</label>
+          <label class="input-group-text" for="selQuesito"><strong>Quesito</strong></label>
         </div>
         <select class="custom-select" id="selQuesito" onchange="teste()">
           {{#each quesitos}}
@@ -60,11 +60,11 @@
         <tr>
           <td class="text-center">{{numero}}</td>
           <td>
-            <a href="javascript:void(0)" class="snf-link1" onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}]);">{{@index}}:{{nome}}</a>
+            <a href="javascript:void(0)" class="snf-link1" onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}]);">{{nome}}</a>
           </td>
 
           {{#each notas}}
-          <td class="text-center">{{@index}}: {{this}}</td>
+          <td class="text-center">{{this}}</td>
           {{/each}}
         </tr>
         {{/each}}
