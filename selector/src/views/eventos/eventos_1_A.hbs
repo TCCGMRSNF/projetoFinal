@@ -108,8 +108,8 @@
                     <span class="input-group-text" id="inputGroup-sizing-lg">Nota:</span>
                   </div>
 
-                  <input type="number" class="form-control form-control-lg" id="inputNota" name="inputNota" min="0"
-                    max="10" step="0.01">
+                  <input type="number" class="form-control form-control-lg" id="inputNota" name="inputNota" min="{{evento.nota_min}}"
+                    max="{{evento.nota_max}}" step="0.01">
                 </div>
 
 
@@ -149,6 +149,8 @@
       document.getElementById("modNumero").innerHTML = 'Nº ' + numero;
       document.getElementById("modNome").innerHTML = 'Candidato: ' + nome;
       document.getElementById("inputNota").value = notas[iQ];
+
+      document.getElementById("selQuesito").options[iQ].selected=true;
 
       var cLink = '/nota/' + evtId + '/' + iQ + '/' + candId;
       document.getElementById("formNota").action = cLink; 

@@ -25,9 +25,11 @@
                     <th class="text-right">Cand</th>
                     <th class="text-right">Aprov</th>
                     <th class="text-right">Qst</th>
+                    <th class="text-right">Nota Mín</th>
+                    <th class="text-right">Nota Máx</th>
                     <th class="text-center">Início</th>
                     <th class="text-center">Final</th>
-                    {{> timestamp_h}}
+<!--                    {{> timestamp_h}} -->
                 </tr>
             </thead>
             <tbody id="grid">
@@ -47,9 +49,11 @@
                     <td class="text-right">{{qtd_cand}}</td>
                     <td class="text-right">{{qtd_aprov}}</td>
                     <td class="text-right">{{qtd_ques}}</td>
+                    <td class="text-right">{{nota_min}}</td>
+                    <td class="text-right">{{nota_max}}</td>
                     <td class="text-center">{{fDataHora ts_ini '/'}}</td>
                     <td class="text-center">{{fDataHora ts_fim '/'}}</td>
-                    {{> timestamp_b}}
+<!--                    {{> timestamp_b}} -->
                 </tr>
                 {{/each}}
             </tbody>
