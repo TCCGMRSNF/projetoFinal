@@ -66,6 +66,7 @@ app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/eventos', require('./routes/eventos'));
+app.use('/notas', require('./routes/notas'));
 
 
 
