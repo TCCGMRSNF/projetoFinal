@@ -1,5 +1,3 @@
-{{!--     <a>|{{quesitos.[0].descricao}}|</a>  --}}
-
 <div class="container mt-3">
   <div class="container">
     <div class="alert alert-info" role="alert">
@@ -98,22 +96,14 @@
             </div>
 
             <div class="card">
-
               <div class="card-body">
-
-
                 <div class="input-group input-group-lg">
-
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Nota:</span>
                   </div>
-
                   <input type="number" autofocus class="form-control form-control-lg" id="inputNota" name="inputNota"
                     min="{{evento.nota_min}}" max="{{evento.nota_max}}" step="0.01">
                 </div>
-
-
-
               </div>
             </div>
           </div>
@@ -127,17 +117,9 @@
 
   </form>
 
-
-
   {{> script_grid_filter}}
 
-
   <script>
-    function teste() {
-      console.log(document.getElementById("selQuesito").value);
-
-    }
-
     function abreModal(numero, nome, iQ, notas, evtId, candId) {
       console.log(numero, nome, iQ, notas, evtId, candId);
       var e = document.getElementById("selQuesito");
@@ -148,12 +130,10 @@
 
       document.getElementById("selQuesito").options[iQ].selected = true;
 
-      var cLink = '/notas/' + evtId + '/' + iQ + '/' + candId;
+      var cLink = '/notas/gravar/' + evtId + '/' + iQ + '/' + candId;
       document.getElementById("formNota").action = cLink;
 
-
       $('#modalNota').modal('show');
-
     }
 
   </script>
