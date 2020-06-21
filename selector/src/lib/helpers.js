@@ -51,7 +51,12 @@ helpers.getCandidatos = async (evtId) => {
     return (candidatos);
 }
 
-
+helpers.getAvaliadores = async (evtId) => {
+    const avaliadores = await pool.query(
+        'SELECT * FROM evento_usuario AS eu WHERE eu.evt_id = ? AND eu.funcao = "1"'
+        , [evtId]);
+    return (avaliadores);
+}
 
 
 

@@ -69,10 +69,6 @@ function criaNotas(candidatos, nQues) {
     
     });
     return (candidatos);
-
-
-
-
 }
 
 async function getQuesitos(evtId) {
