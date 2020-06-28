@@ -69,6 +69,10 @@
       </table>
     </div>
   </div>
+            <div id="spinner" class="d-none container mt-3 text-center">
+            <i class="fas fa-sync-alt fa-3x fa-spin"></i>
+          </div>
+
 
   <!-- Modal -->
   <form onsubmit="gravar()" id="formNota" action="" method="POST">
@@ -109,9 +113,9 @@
           <div id="buttons" class="modal-footer d-flex justify-content-center">
             <button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-success col-3" onclick="gravar()">Salvar</button>
-          </div>
-          <div id="spinner" class="d-none container mt-3 text-center">
-            <i class="fas fa-sync-alt fa-3x fa-spin"></i>
+
+            <button type="button" class="btn btn-secondary col-3" onclick="gravar()">Show/Hide</button>
+
           </div>
         </div>
       </div>
@@ -139,10 +143,11 @@
     }
 
           function gravar() {
-      alert('Entrou no gravar!');
-       document.getElementById('buttons').style.display = 'none';
-       document.getElementById('spinner').style.display = 'block';
-      alert('Já rodou os doid showHide!');
+//      alert('Entrou no gravar!');
+       document.getElementById('#buttons').style.display = 'none';
+       document.getElementById('#spinner').style.display = 'block';
+       $('spinner').show();
+//      alert('Já rodou os doid showHide!');
     }
 
 
