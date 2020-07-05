@@ -104,16 +104,11 @@ router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
             await pool.query(
                 'INSERT INTO resultados SET ?', [aScore]);
         } else {
-
-//            await pool.query('UPDATE links SET ? WHERE id = ?', [editedLink, id]);
-            
             await pool.query(
                 'UPDATE resultados SET ? \
-                WHERE evt_id = ? AND cdt_id = ?', [aScore, sEvtId,  sCanId]);
-            console.log('Editado: Score ', aScore.score);
+                WHERE evt_id = ? AND cdt_id = ?', [aScore, sEvtId, sCanId]);
         };
     });
-
 
     backURL = req.header('Referer') || '/';
     res.redirect(backURL);
