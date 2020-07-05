@@ -64,19 +64,28 @@ helpers.getEvento = async (evtId) => {
 return (evento);
 }
 
-helpers.calcularScore = (aMed, nQues) => {
+helpers.calcularScore = (aMed, nQues, nCasas) => {
     var score = 0;
     var cVar = '';
+    var nMed = 0;
     for (var i = 0; i < nQues; i++) {
         cVar = 'aMed.m' + ('0'+i).slice(-2);
-        score +=  eval(cVar);
+        nMed = eval(cVar)
+        score += nMed ;
     }
-    score = score / nQues;    // Cálculo do Score Final
+    score = score / nQues;
+    score = score.toFixed(nCasas);    // Cálculo do Score Final
     return (score);
-
-
 }
 
+helpers.ajustarMedias = (aMed, nQues, nCasas) => {
+    var cVar = '';
+    for (var i = 0; i < nQues; i++) {
+        cVar = 'aMed[0].m' + ('0'+i).slice(-2);
+        eval(cVar + ' = parseFloat(' + cVar + ')');
+    }
+    return (aMed);
+}
 
 
 

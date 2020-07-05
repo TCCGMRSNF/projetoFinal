@@ -65,12 +65,9 @@ router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
     const quesitos = await helpers.getQuesitos(evtId);
     const candidatos = await helpers.getCandidatos(evtId);
     const evento = await helpers.getEvento(sEvtId);
-    //    const avaliadores = await helpers.getAvaliadores(evtId);
-
-    //    console.log(quesitos);
-    //    console.log(candidatos);
-
-
+    const nQuesitos = evento[0].qtd_ques;
+    const nCasasMedia = evento[0].nota_decimais;
+    const nCasasScore = evento[0].score_decimais;
 
     candidatos.forEach(async (can) => {
         var sCanId = can.usr_id.toString();
@@ -79,38 +76,37 @@ router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
                     AVG(nota03) AS m03, AVG(nota04) AS m04, AVG(nota05) AS m05, \
                     AVG(nota06) AS m06, AVG(nota07) AS m07, AVG(nota08) AS m08, \
                     AVG(nota09) AS m09 \
-            FROM notas WHERE evt_id = ? AND cdt_id = ?'
+            FROM notas \
+            WHERE evt_id = ? AND cdt_id = ?'
             , [sEvtId, sCanId]);
 
-        var aMedia = {
+        medias = helpers.ajustarMedias(medias, nQuesitos, nCasasMedia);
+
+        var aScore = {
             evt_id: evtId,
             cdt_id: can.usr_id,
             numero: can.numero,
-            score: helpers.calcularScore(medias[0], evento[0].qtd_ques),
+            score: helpers.calcularScore(medias[0], nQuesitos, nCasasScore),
             media00: medias[0].m00, media01: medias[0].m01, media02: medias[0].m02,
             media03: medias[0].m03, media04: medias[0].m04, media05: medias[0].m05,
             media06: medias[0].m06, media07: medias[0].m07, media08: medias[0].m08,
             media09: medias[0].m09
         };
 
-        console.log(aMedia);
+        // Verifica se existe registro de score para o candidato
+        var rows = await pool.query(
+            'SELECT evt_id FROM resultados \
+            WHERE evt_id = ? AND cdt_id = ?'
+            , [sEvtId, sCanId]);
 
+        // Se o registro mão existe, é criado. Se existir, é atualizado.
+        if (rows.length === 0) {
+            await pool.query(
+                'INSERT INTO resultados SET ?', [aScore]);
+        } else {
+            console.log('Editado: Score ', aScore.score);
+        };
 
-
-        /*
-                if (rows.length === 0) {
-                    var amedia = {
-                        evt_id: evtId,
-                        avl_id: aval.usr_id,
-                        cdt_id: can.usr_id,
-                        nota00: 0, nota01: 0, nota02: 0, nota03: 0, nota04: 0,
-                        nota05: 0, nota06: 0, nota07: 0, nota08: 0, nota09: 0
-                    };
-                    await pool.query(
-                        'INSERT INTO notas SET ?', [aNota]);
-                };
-        
-        */
 
 
     });
