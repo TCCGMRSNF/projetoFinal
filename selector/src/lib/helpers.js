@@ -58,6 +58,24 @@ helpers.getAvaliadores = async (evtId) => {
     return (avaliadores);
 }
 
+helpers.getEvento = async (evtId) => {
+    const evento = await pool.query(
+        'SELECT * FROM eventos WHERE id = ? limit 1', [evtId]);
+return (evento);
+}
+
+helpers.calcularScore = (aMed, nQues) => {
+    var score = 0;
+    var cVar = '';
+    for (var i = 0; i < nQues; i++) {
+        cVar = 'aMed.m' + ('0'+i).slice(-2);
+        score +=  eval(cVar);
+    }
+    score = score / nQues;    // Cálculo do Score Final
+    return (score);
+
+
+}
 
 
 

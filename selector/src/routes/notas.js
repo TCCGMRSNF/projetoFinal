@@ -57,47 +57,71 @@ router.get('/grid/:evtId', isLoggedIn, async (req, res) => {
     res.redirect(backURL);
     //res.status(200);
 });
-/*
+
 // Cálculo de médias e escores
 router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
     const { evtId } = req.params;
     const sEvtId = evtId.toString();
     const quesitos = await helpers.getQuesitos(evtId);
     const candidatos = await helpers.getCandidatos(evtId);
+    const evento = await helpers.getEvento(sEvtId);
     //    const avaliadores = await helpers.getAvaliadores(evtId);
 
-    console.log(quesitos);
-    console.log(candidatos);
-    //  console.log(avaliadores);
+    //    console.log(quesitos);
+    //    console.log(candidatos);
 
 
 
-    candidatos.forEach((can) => {
+    candidatos.forEach(async (can) => {
         var sCanId = can.usr_id.toString();
-        var rows = await pool.query(
-            'SELECT AVG(nota00), AVG(nota01), AVG(nota02), AVG(nota03), AVG(nota04), AVG(nota05), AVG(nota06), AVG(nota07), AVG(nota08), AVG(nota09) FROM notas WHERE evt_id = ? AND cdt_id = ?'
-            , [sEvtId, sAvlId, sCanId]);
+        var medias = await pool.query(
+            'SELECT AVG(nota00) AS m00, AVG(nota01) AS m01, AVG(nota02) AS m02, \
+                    AVG(nota03) AS m03, AVG(nota04) AS m04, AVG(nota05) AS m05, \
+                    AVG(nota06) AS m06, AVG(nota07) AS m07, AVG(nota08) AS m08, \
+                    AVG(nota09) AS m09 \
+            FROM notas WHERE evt_id = ? AND cdt_id = ?'
+            , [sEvtId, sCanId]);
 
-        if (rows.length === 0) {
-            var aNota = {
-                evt_id: evtId,
-                avl_id: aval.usr_id,
-                cdt_id: can.usr_id,
-                nota00: 0, nota01: 0, nota02: 0, nota03: 0, nota04: 0,
-                nota05: 0, nota06: 0, nota07: 0, nota08: 0, nota09: 0
-            };
-            await pool.query(
-                'INSERT INTO notas SET ?', [aNota]);
+        var aMedia = {
+            evt_id: evtId,
+            cdt_id: can.usr_id,
+            numero: can.numero,
+            score: helpers.calcularScore(medias[0], evento[0].qtd_ques),
+            media00: medias[0].m00, media01: medias[0].m01, media02: medias[0].m02,
+            media03: medias[0].m03, media04: medias[0].m04, media05: medias[0].m05,
+            media06: medias[0].m06, media07: medias[0].m07, media08: medias[0].m08,
+            media09: medias[0].m09
         };
 
+        console.log(aMedia);
+
+
+
+        /*
+                if (rows.length === 0) {
+                    var amedia = {
+                        evt_id: evtId,
+                        avl_id: aval.usr_id,
+                        cdt_id: can.usr_id,
+                        nota00: 0, nota01: 0, nota02: 0, nota03: 0, nota04: 0,
+                        nota05: 0, nota06: 0, nota07: 0, nota08: 0, nota09: 0
+                    };
+                    await pool.query(
+                        'INSERT INTO notas SET ?', [aNota]);
+                };
+        
+        */
+
+
     });
+
 
     backURL = req.header('Referer') || '/';
     res.redirect(backURL);
     //res.status(200);
 });
 
-*/
+
 
 
 
