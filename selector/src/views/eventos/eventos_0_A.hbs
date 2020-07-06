@@ -32,13 +32,25 @@
             <table class="table table-bordered table-striped table-sm table-hover mb-0">
                 <thead>
                     <tr>
-                        <th class="text-center">Núm</th>
-                        <th>Nome</th>
+                        <th rowspan="2" class="align-middle text-center">Núm</th>
+                        <th rowspan="2" class="align-middle">Nome</th>
+                        <th rowspan="2" class="align-middle text-center">Escore</th>
                         {{#each quesitos}}
-                        <th class="text-center">{{descricao}}</th>
+                        <th colspan="5" class="text-center">{{descricao}}</th>
                         {{/each}}
-
                     </tr>
+                    <tr>
+                        {{#each quesitos}}
+                        <th class="text-center">J1</th>
+                        <th class="text-center">J2</th>
+                        <th class="text-center">J3</th>
+                        <th class="text-center">J4</th>
+                        <th class="text-center">J5</th>
+                        {{/each}}
+                    </tr>
+
+
+
                 </thead>
                 <tbody id="grid">
                     {{#each candidatos}}
