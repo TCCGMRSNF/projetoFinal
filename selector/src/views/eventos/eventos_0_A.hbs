@@ -51,7 +51,6 @@
                 </thead>
 
                 <tbody id="grid">
-
                     {{#each resultados}}
                     <tr>
                         <td class="align-middle text-center">{{numero}}</td>
@@ -61,21 +60,11 @@
                                 onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}], {{../evento.id}}, {{id}});">{{nome}}</a>
                         </td>
                         <td class="align-middle text-center">{{score}}</td>
-                        {{#each ../quesitos}}
-                        <td class="text-center">N1</td>
-                        <td class="text-center">N2</td>
-                        <td class="text-center">N3</td>
-                        <td class="text-center">N4</td>
-                        <td class="text-center">N5</td>
+
+                        {{#each notas}}
+                        <td class="align-middle text-center">{{this}}</td>
                         {{/each}}
                     </tr>
-                    <!--
-                        {{#each notas}}
-                        <td class="text-center">{{this}}</td>
-                        {{/each}}
-                        -->
-
-                    
                     {{/each}}
 
                 </tbody>

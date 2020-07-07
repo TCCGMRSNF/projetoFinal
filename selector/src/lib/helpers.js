@@ -61,7 +61,7 @@ helpers.getAvaliadores = async (evtId) => {
 helpers.getEvento = async (evtId) => {
     const evento = await pool.query(
         'SELECT * FROM eventos WHERE id = ? limit 1', [evtId]);
-return (evento);
+    return (evento);
 }
 
 helpers.calcularScore = (aMed, nQues, nCasas) => {
@@ -69,9 +69,9 @@ helpers.calcularScore = (aMed, nQues, nCasas) => {
     var cVar = '';
     var nMed = 0;
     for (var i = 0; i < nQues; i++) {
-        cVar = 'aMed.m' + ('0'+i).slice(-2);
+        cVar = 'aMed.m' + ('0' + i).slice(-2);
         nMed = eval(cVar)
-        score += nMed ;
+        score += nMed;
     }
     score = score / nQues;
     score = score.toFixed(nCasas);    // Cálculo do Score Final
@@ -81,11 +81,122 @@ helpers.calcularScore = (aMed, nQues, nCasas) => {
 helpers.ajustarMedias = (aMed, nQues, nCasas) => {
     var cVar = '';
     for (var i = 0; i < nQues; i++) {
-        cVar = 'aMed[0].m' + ('0'+i).slice(-2);
+        cVar = 'aMed[0].m' + ('0' + i).slice(-2);
         eval(cVar + ' = parseFloat(' + cVar + ')');
     }
     return (aMed);
 }
+
+helpers.agregarNotas = (sEvtId, resultados, quesitos, avaliadores) => {
+    resultados.forEach((res) => {
+        // var aNotas = [11,12,13,14,15,21,22,23,24,25,31,32,33,34,35];
+        var aNotas = [];
+        var sCanId = res.cdt_id.toString();
+        quesitos.forEach((ques, index, arr) => {
+            var sCampo = 'nota0' + index.toString();
+            avaliadores.forEach(async (avl) => {
+                var sAvlId = avl.usr_id.toString();
+
+                /*                
+                                var nNota = await pool.query(
+                                    'SELECT ' + sCampo + ' AS nota FROM notas \
+                                    WHERE evt_id = ? AND cdt_id = ? AND avl_id = ?', [sEvtId, sCanId, sAvlId]);
+                
+                                aNotas.push(nNota[0]9.9);
+                                console.log(nNota[0].nota);
+                */
+                aNotas.push(sCampo);
+
+
+            });
+        });
+        //       console.log(aNotas);
+        res.notas = aNotas;
+        console.log('Vetor: ', aNotas);
+
+    });
+
+    //console.log(resultados);
+    //console.log(quesitos);
+    //console.log(avaliadores);
+
+    return (resultados);
+}
+
+helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
+    const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? ORDER BY numero, avl_id', [sEvtId]);
+    const nQues = quesitos.length;
+    const nAvl  = avaliadores.length;
+
+    resultados.forEach((res) => {
+        res.notas = new Array(nQues * nAvl);
+        quesitos.forEach((ques, index1, arr) => {
+            var sCampo = 'nota0' + index1.toString();
+            avaliadores.forEach((avl, index2) => {
+                var indice = index1 * nAvl + index2;
+                res.notas[indice] = indice;
+            });
+        });
+    });
+    console.log(resultados);
+    return (resultados);
+}
+
+//            res.notas[index] = row.nota00;
+
+
+
+helpers.agregarNotas2 = (sEvtId, resultados, quesitos, avaliadores) => {
+
+    //const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
+    //const aNt1 = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
+    //const aNt2 = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
+
+    resultados.forEach(async (res) => {
+        var sCanId = res.cdt_id.toString();
+        res.notas = [];
+        const rows = await pool.query('SELECT nota00 FROM notas WHERE evt_id = ? AND cdt_id = ?', [sEvtId, sCanId]);
+        rows.forEach((row) => {
+            res.notas.push(row.nota00);
+            //            aXX.push(row.nota01);
+        });
+
+    });
+    return (resultados);
+}
+
+
+
+
+
+
+
+
+
+/*
+        var anotas = [];
+        var sCanId = res.cdt_id;
+        var rows = await pool.query(
+            'SELECT * FROM notas WHERE evt_id = ? AND cdt_id = ?'
+            , [sEvtId, sCanId]);
+
+            res.teste = await res.cdt_id;
+//        console.log(rows);
+
+        rows.forEach((row) => {
+            aXX.push(row.nota00);
+            aXX.push(row.nota01);
+        });
+
+
+*/
+
+
+
+
+
+
+
 
 
 

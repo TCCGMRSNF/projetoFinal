@@ -122,12 +122,9 @@ router.get('/resultados/:evtId', isLoggedIn, async (req, res) => {
     const { evtId } = req.params;
     const sEvtId = evtId.toString();
     const quesitos = await helpers.getQuesitos(evtId);
-//    const candidatos = await helpers.getCandidatos(evtId);
     const evento = await helpers.getEvento(sEvtId);
     const avaliadores = await helpers.getAvaliadores(sEvtId);
-//    const nQuesitos = evento[0].qtd_ques;
-//    const nCasasMedia = evento[0].nota_decimais;
-//    const nCasasScore = evento[0].score_decimais;
+    //const nQuesitos = evento[0].qtd_ques;
 
 
     var resultados = await pool.query(
@@ -138,13 +135,8 @@ router.get('/resultados/:evtId', isLoggedIn, async (req, res) => {
         ORDER BY numero'
         , [sEvtId]);
 
-        aNotas = [11,12,13,14,15,21,22,23,24,25,31,32,33,34,35];
-        resultados.forEach((res) => {
-            res.notas = aNotas;
-        });
 
-
-        console.log(resultados);
+    resultados = await helpers.agregarNotas1(sEvtId, resultados, quesitos, avaliadores);
 
     const rota = 'eventos/eventos_0_A';
     res.render(rota, { evento: evento[0], quesitos, avaliadores, resultados });
