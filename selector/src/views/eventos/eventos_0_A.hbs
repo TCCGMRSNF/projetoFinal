@@ -52,7 +52,7 @@
 
                 <tbody id="grid">
 
-                    {{#each candidatos}}
+                    {{#each resultados}}
                     <tr>
                         <td class="align-middle text-center">{{numero}}</td>
 
@@ -60,7 +60,7 @@
                             <a href="javascript:void(0)" class="snf-link1"
                                 onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}], {{../evento.id}}, {{id}});">{{nome}}</a>
                         </td>
-                        <td class="align-middle text-center">9.99</td>
+                        <td class="align-middle text-center">{{score}}</td>
                         {{#each ../quesitos}}
                         <td class="text-center">N1</td>
                         <td class="text-center">N2</td>

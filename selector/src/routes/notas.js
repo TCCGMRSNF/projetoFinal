@@ -116,6 +116,39 @@ router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
 });
 
 
+//================================================
+// Retorna Grid de Scores e Notas
+router.get('/resultados/:evtId', isLoggedIn, async (req, res) => {
+    const { evtId } = req.params;
+    const sEvtId = evtId.toString();
+    const quesitos = await helpers.getQuesitos(evtId);
+//    const candidatos = await helpers.getCandidatos(evtId);
+    const evento = await helpers.getEvento(sEvtId);
+    const avaliadores = await helpers.getAvaliadores(sEvtId);
+//    const nQuesitos = evento[0].qtd_ques;
+//    const nCasasMedia = evento[0].nota_decimais;
+//    const nCasasScore = evento[0].score_decimais;
+
+
+    var resultados = await pool.query(
+        'SELECT evt_id, cdt_id, numero, score, nome, media00, media01, media02, \
+                media03,  media04,  media05,  media06, media07, media09 \
+        FROM resultados, usuarios \
+        WHERE evt_id = ? AND resultados.cdt_id = usuarios.id \
+        ORDER BY numero'
+        , [sEvtId]);
+
+        aNotas = [11,12,13,14,15,21,22,23,24,25,31,32,33,34,35];
+        resultados.forEach((res) => {
+            res.notas = aNotas;
+        });
+
+
+        console.log(resultados);
+
+    const rota = 'eventos/eventos_0_A';
+    res.render(rota, { evento: evento[0], quesitos, avaliadores, resultados });
+});
 
 
 
