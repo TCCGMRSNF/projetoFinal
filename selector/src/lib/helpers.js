@@ -126,19 +126,23 @@ helpers.agregarNotas = (sEvtId, resultados, quesitos, avaliadores) => {
 helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
     const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? ORDER BY numero, avl_id', [sEvtId]);
     const nQues = quesitos.length;
-    const nAvl  = avaliadores.length;
+    const nAvl = avaliadores.length;
+
+    var nIdx = 0;
 
     resultados.forEach((res) => {
         res.notas = new Array(nQues * nAvl);
-        quesitos.forEach((ques, index1, arr) => {
-            var sCampo = 'nota0' + index1.toString();
-            avaliadores.forEach((avl, index2) => {
-                var indice = index1 * nAvl + index2;
-                res.notas[indice] = indice;
+        avaliadores.forEach((avl, index1) => {
+            quesitos.forEach((ques, index2) => {
+                var sCampo = 'aNt[nIdx].nota0' + index2.toString();
+                var indice = index2 * nAvl + index1;
+
+                res.notas[indice] = eval(sCampo);
             });
+            nIdx++;
         });
     });
-    console.log(resultados);
+    console.log(aNt);
     return (resultados);
 }
 
