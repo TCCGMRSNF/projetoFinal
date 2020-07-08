@@ -87,47 +87,10 @@ helpers.ajustarMedias = (aMed, nQues, nCasas) => {
     return (aMed);
 }
 
-helpers.agregarNotas = (sEvtId, resultados, quesitos, avaliadores) => {
-    resultados.forEach((res) => {
-        // var aNotas = [11,12,13,14,15,21,22,23,24,25,31,32,33,34,35];
-        var aNotas = [];
-        var sCanId = res.cdt_id.toString();
-        quesitos.forEach((ques, index, arr) => {
-            var sCampo = 'nota0' + index.toString();
-            avaliadores.forEach(async (avl) => {
-                var sAvlId = avl.usr_id.toString();
-
-                /*                
-                                var nNota = await pool.query(
-                                    'SELECT ' + sCampo + ' AS nota FROM notas \
-                                    WHERE evt_id = ? AND cdt_id = ? AND avl_id = ?', [sEvtId, sCanId, sAvlId]);
-                
-                                aNotas.push(nNota[0]9.9);
-                                console.log(nNota[0].nota);
-                */
-                aNotas.push(sCampo);
-
-
-            });
-        });
-        //       console.log(aNotas);
-        res.notas = aNotas;
-        console.log('Vetor: ', aNotas);
-
-    });
-
-    //console.log(resultados);
-    //console.log(quesitos);
-    //console.log(avaliadores);
-
-    return (resultados);
-}
-
 helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
     const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? ORDER BY numero, avl_id', [sEvtId]);
     const nQues = quesitos.length;
     const nAvl = avaliadores.length;
-
     var nIdx = 0;
 
     resultados.forEach((res) => {
@@ -136,73 +99,13 @@ helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
             quesitos.forEach((ques, index2) => {
                 var sCampo = 'aNt[nIdx].nota0' + index2.toString();
                 var indice = index2 * nAvl + index1;
-
                 res.notas[indice] = eval(sCampo);
             });
             nIdx++;
         });
     });
-    console.log(aNt);
     return (resultados);
 }
-
-//            res.notas[index] = row.nota00;
-
-
-
-helpers.agregarNotas2 = (sEvtId, resultados, quesitos, avaliadores) => {
-
-    //const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
-    //const aNt1 = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
-    //const aNt2 = await pool.query('SELECT * FROM notas WHERE evt_id = ? limit 3', [sEvtId]);
-
-    resultados.forEach(async (res) => {
-        var sCanId = res.cdt_id.toString();
-        res.notas = [];
-        const rows = await pool.query('SELECT nota00 FROM notas WHERE evt_id = ? AND cdt_id = ?', [sEvtId, sCanId]);
-        rows.forEach((row) => {
-            res.notas.push(row.nota00);
-            //            aXX.push(row.nota01);
-        });
-
-    });
-    return (resultados);
-}
-
-
-
-
-
-
-
-
-
-/*
-        var anotas = [];
-        var sCanId = res.cdt_id;
-        var rows = await pool.query(
-            'SELECT * FROM notas WHERE evt_id = ? AND cdt_id = ?'
-            , [sEvtId, sCanId]);
-
-            res.teste = await res.cdt_id;
-//        console.log(rows);
-
-        rows.forEach((row) => {
-            aXX.push(row.nota00);
-            aXX.push(row.nota01);
-        });
-
-
-*/
-
-
-
-
-
-
-
-
-
 
 
 
