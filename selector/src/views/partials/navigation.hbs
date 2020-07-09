@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand shadow-lg rounded" href="/">SELECTOR
       {{#if authUser}}
-       [{{authUser.email}}]
+      [{{authUser.email}}]
       {{/if}}
 
     </a>
@@ -11,20 +11,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-
-
-
-
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         {{#if authUser}}
 
- 
-    <a class="btn btn-warning" href="/eventos/funcao/0" role="button" {{#if funcao}}active{{/if}}><strong>Coordenador</strong></a>
-    <a class="btn btn-warning" href="/eventos/funcao/1" role="button"><strong>Avaliador</strong></a>
-
-
-
+        <div>
+          <a class="btn btn-warning" href="/eventos/funcao/0" role="button"
+            {{#if funcao}}active{{/if}}><strong>Coordenador</strong></a>
+          <a class="btn btn-warning" href="/eventos/funcao/1" role="button"><strong>Avaliador</strong></a>
+        </div>
 
         <li class="nav-item">
           <a href="/eventos/funcao/0" class="nav-link">Home</a>
@@ -55,16 +50,7 @@
         <li class="nav-item">
           <a href="/signin" class="nav-link"><strong>Login</strong></a>
         </li>
-
-
-
-
-
-
         {{/if}}
-
-
-
 
       </ul>
     </div>

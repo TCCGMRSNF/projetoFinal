@@ -14,50 +14,52 @@
         </div>
     </div>
 
-    {{!-- Table --}}
-    <div class="mt-2 table-wrapper-scroll-y my-custom-scrollbar">
-        <table class="table table-bordered table-striped table-sm table-hover mb-0">
-            <thead>
-                <tr>
-                    <th class="text-right">Id</th>
-                    <th>Descrição</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-right">Cand</th>
-                    <th class="text-right">Aprov</th>
-                    <th class="text-right">Qst</th>
-                    <th class="text-right">Nota Mín</th>
-                    <th class="text-right">Nota Máx</th>
-                    <th class="text-center">Início</th>
-                    <th class="text-center">Final</th>
-<!--                    {{> timestamp_h}} -->
-                </tr>
-            </thead>
-            <tbody id="grid">
-                {{#each eventos}}
-                <tr>
-                    <td class="text-right">{{id}}</td>
-                    <td>
-                        <a href="/notas/resultados/{{id}}" class="snf-link1">{{descricao}}</a>
-                    </td>
-                    <td class="text-center">
-                        {{#if votar}}
-                        <i class="far fa-circle text-success"></i>
-                        {{else}}
-                        <i class="fas fa-circle text-success" text></i>
-                        {{/if}}
-                    </td>
-                    <td class="text-right">{{qtd_cand}}</td>
-                    <td class="text-right">{{qtd_aprov}}</td>
-                    <td class="text-right">{{qtd_ques}}</td>
-                    <td class="text-right">{{nota_min}}</td>
-                    <td class="text-right">{{nota_max}}</td>
-                    <td class="text-center">{{fDataHora ts_ini '/'}}</td>
-                    <td class="text-center">{{fDataHora ts_fim '/'}}</td>
-<!--                    {{> timestamp_b}} -->
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
+</div>
 
-    {{> script_grid_filter}}
+{{!-- Table --}}
+<div class="mt-2 table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped table-sm table-hover mb-0">
+        <thead>
+            <tr>
+                <th class="text-right">Id</th>
+                <th>Descrição</th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Cand</th>
+                <th class="text-right">Aprov</th>
+                <th class="text-right">Qst</th>
+                <th class="text-right">Nota Mín</th>
+                <th class="text-right">Nota Máx</th>
+                <th class="text-center">Início</th>
+                <th class="text-center">Final</th>
+                <!--                    {{> timestamp_h}} -->
+            </tr>
+        </thead>
+        <tbody id="grid">
+            {{#each eventos}}
+            <tr>
+                <td class="text-right">{{id}}</td>
+                <td>
+                    <a href="/notas/resultados/{{id}}" class="snf-link1">{{descricao}}</a>
+                </td>
+                <td class="text-center">
+                    {{#if votar}}
+                    <i class="far fa-circle text-success"></i>
+                    {{else}}
+                    <i class="fas fa-circle text-success" text></i>
+                    {{/if}}
+                </td>
+                <td class="text-right">{{qtd_cand}}</td>
+                <td class="text-right">{{qtd_aprov}}</td>
+                <td class="text-right">{{qtd_ques}}</td>
+                <td class="text-right">{{nota_min}}</td>
+                <td class="text-right">{{nota_max}}</td>
+                <td class="text-center">{{fDataHora ts_ini '/'}}</td>
+                <td class="text-center">{{fDataHora ts_fim '/'}}</td>
+                <!--                    {{> timestamp_b}} -->
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{> script_grid_filter}}
