@@ -118,28 +118,39 @@ router.get('/scores/:evtId', isLoggedIn, async (req, res) => {
 
 //================================================
 // Retorna Grid de Scores e Notas
-router.get('/resultados/:evtId', isLoggedIn, async (req, res) => {
-    const { evtId } = req.params;
+router.get('/resultados/:evtId/:tpRet', isLoggedIn, async (req, res) => {
+    const { evtId, tpRet } = req.params;
     const sEvtId = evtId.toString();
     const quesitos = await helpers.getQuesitos(evtId);
     const evento = await helpers.getEvento(sEvtId);
     const avaliadores = await helpers.getAvaliadores(sEvtId);
-    //const nQuesitos = evento[0].qtd_ques;
 
+    var cQuery = 'SELECT evt_id, cdt_id, numero, score, nome, media00, media01, media02, \
+    media03,  media04,  media05,  media06, media07, media09 \
+    FROM resultados, usuarios \
+    WHERE evt_id = ? AND resultados.cdt_id = usuarios.id';
+    const cQuery2 = ' ORDER BY ';
+    var cRota = '';
 
-    var resultados = await pool.query(
-        'SELECT evt_id, cdt_id, numero, score, nome, media00, media01, media02, \
-                media03,  media04,  media05,  media06, media07, media09 \
-        FROM resultados, usuarios \
-        WHERE evt_id = ? AND resultados.cdt_id = usuarios.id \
-        ORDER BY numero'
-        , [sEvtId]);
+    switch (tpRet) {
+        case 'N':
+            cQuery += cQuery2 + 'numero';
+            cRota = 'eventos/eventos_0_A';
+            break;
+        case 'R':
+            cQuery += cQuery2 + 'score DESC';
+            cRota = 'eventos/eventos_0_B';
+            break;
+        default:
+            cRota = 'eventos/eventos_0_A';
+    }
 
+    var resultados = await pool.query(cQuery, [sEvtId]);
 
-    resultados = await helpers.agregarNotas1(sEvtId, resultados, quesitos, avaliadores);
+    if (tpRet === 'N')
+        resultados = await helpers.agregarNotas1(sEvtId, resultados, quesitos, avaliadores);
 
-    const rota = 'eventos/eventos_0_A';
-    res.render(rota, { evento: evento[0], quesitos, avaliadores, resultados });
+    res.render(cRota, { evento: evento[0], quesitos, avaliadores, resultados });
 });
 
 
