@@ -23,9 +23,10 @@ const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 console.log(dt.toLocaleDateString('de-AT', options));
 
 
-let numero = 123321.23;
-let formato = { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' };
-let moeda = numero .toLocaleString('pt-BR', formato);
+let numero = 123321.2;
+//let formato = { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' };
+let formato = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+let moeda = numero.toLocaleString('pt-BR', formato);
 console.log(moeda);
 
 console.log(dt.toLocaleString().split(' ')[1]);

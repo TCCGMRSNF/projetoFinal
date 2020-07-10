@@ -11,8 +11,8 @@ router.get('/funcao/:funcao', isLoggedIn, async (req, res) => {
         , [req.user.id, funcao.toString()]);
 
     const rota = 'eventos/eventos_list_' + funcao.toString()
-    console.log(eventos);
-    console.log(funcao);
+    //console.log(eventos);
+    //console.log(funcao);
     res.render(rota, { eventos, funcao });
 });
 
@@ -47,15 +47,7 @@ router.get('/:funcao/:id', isLoggedIn, async (req, res) => {
 
     const rota = 'eventos/eventos_' + funcao.toString() + '_A';
 
-
-    console.log(candidatos);
-    console.log(quesitos);
-    console.log(evento);
-    //   console.log('Notas---------------------');
-    //   console.log(notas);
-
-
-    res.render(rota, { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
+     res.render(rota, { funcao, evento: evento[0], quesitos, avaliadores, candidatos });
 });
 
 function criaNotas(candidatos, nQues) {
@@ -63,7 +55,7 @@ function criaNotas(candidatos, nQues) {
         can.notas = [];
         for (var i = 0; i < nQues; i++) {
             var cVar = 'can.nota' + ('0'+i).slice(-2);
-            console.log(cVar);
+            //console.log(cVar);
             can.notas[i] = eval(cVar);
         }
     
@@ -106,20 +98,19 @@ function preparaGridNotas(candidatos, quesitos, notas) {
     notas.forEach((nt, index) => {
 
         var i_qst = quesitos.findIndex((ques, index, array) => ques.id === nt.qst_id);
-        console.log('Ind Quesito: ', i_qst);
+        //console.log('Ind Quesito: ', i_qst);
 
         var i_can = candidatos.findIndex((cand, index, array) => cand.id === nt.cdt_id);
-        console.log('Ind Candidato: ', i_can);
+        //console.log('Ind Candidato: ', i_can);
 
-        console.log(candidatos[i_can].notas);
-        console.log('Nota: ', nt.nota);
+        //console.log(candidatos[i_can].notas);
+        //console.log('Nota: ', nt.nota);
         candidatos[i_can].notas[i_qst] = nt.nota;
         //            candidatos[i_can].notas[i_qst] = nt.nota;
 
     });
-    console.log(candidatos);
+    //console.log(candidatos);
 
-    // Return da função -------------------
     return (candidatos);
 }
 
@@ -140,7 +131,7 @@ function fillArrayNotas(idEvt, idAvl, idCand, quesitos) {
             'SELECT * FROM notas WHERE evt_id = ? AND qst_id = ? AND avl_id = ? AND cdt_id = ? limit 1'
             , [idEvt, ques.id.toString(), idAvl, idCand]);
 
-        console.log(idEvt, ques.id.toString(), idAvl, idCand, sqlNota)
+        //console.log(idEvt, ques.id.toString(), idAvl, idCand, sqlNota)
 
 
         if (sqlNota.length > 0) {
@@ -168,7 +159,7 @@ function xyz(idEvt, idAvl, quesitos, candidatos) {
                 'SELECT * FROM notas WHERE evt_id = ? AND qst_id = ? AND avl_id = ? AND cdt_id = ? limit 1'
                 , [idEvt, ques.id.toString(), idAvl, cand.id.toString()]);
 
-            console.log(idEvt, ques.id.toString(), idAvl, cand.id.toString(), sqlNota);
+            //console.log(idEvt, ques.id.toString(), idAvl, cand.id.toString(), sqlNota);
 
             var vlr = -1;
             if (sqlNota.length > 0) {
@@ -176,12 +167,12 @@ function xyz(idEvt, idAvl, quesitos, candidatos) {
             }
 
             aNotas.push(vlr);
-            console.log(aNotas);
+            //console.log(aNotas);
             return (aNotas);
         });
 
         cand.notas = xNotas;
-        console.log(xNotas);
+        //console.log(xNotas);
 
     });
 

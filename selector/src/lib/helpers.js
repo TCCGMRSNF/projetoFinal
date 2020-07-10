@@ -87,7 +87,7 @@ helpers.ajustarMedias = (aMed, nQues, nCasas) => {
     return (aMed);
 }
 
-helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
+helpers.agregarNotas = async (sEvtId, resultados, quesitos, avaliadores) => {
     const aNt = await pool.query('SELECT * FROM notas WHERE evt_id = ? ORDER BY numero, avl_id', [sEvtId]);
     const nQues = quesitos.length;
     const nAvl = avaliadores.length;
@@ -102,6 +102,17 @@ helpers.agregarNotas1 = async (sEvtId, resultados, quesitos, avaliadores) => {
                 res.notas[indice] = eval(sCampo);
             });
             nIdx++;
+        });
+    });
+    return (resultados);
+}
+
+helpers.agregarMedias = async (resultados, quesitos) => {
+    resultados.forEach((res) => {
+        res.medias = [];
+        quesitos.forEach((ques, index) => {
+            var cCampo = 'res.media0' + index.toString();
+            res.medias[index] = eval(cCampo);
         });
     });
     return (resultados);

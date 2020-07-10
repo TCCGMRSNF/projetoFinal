@@ -51,6 +51,14 @@ helpers.fDataHora = (isoDate, separator) => {
     return (date + ' ' + time);
 };
 
+helpers.fRetIndexP1 = (index) => {
+    return (index + 1);
+};
+
+helpers.fAjustaDec = (num, dec) => {
+    let formato = { minimumFractionDigits: dec, maximumFractionDigits: dec };
+    return ( num.toLocaleString('pt-BR', formato) );
+};
 
 
 helpers.timeago = (timestamp) => {

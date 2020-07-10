@@ -148,7 +148,12 @@ router.get('/resultados/:evtId/:tpRet', isLoggedIn, async (req, res) => {
     var resultados = await pool.query(cQuery, [sEvtId]);
 
     if (tpRet === 'N')
-        resultados = await helpers.agregarNotas1(sEvtId, resultados, quesitos, avaliadores);
+        resultados = await helpers.agregarNotas(sEvtId, resultados, quesitos, avaliadores);
+
+    if (tpRet === 'R')
+        resultados = await helpers.agregarMedias(resultados, quesitos);
+
+//    console.log(resultados);
 
     res.render(cRota, { evento: evento[0], quesitos, avaliadores, resultados });
 });

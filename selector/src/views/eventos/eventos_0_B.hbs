@@ -1,10 +1,10 @@
 <div class="container mt-3">
     <div class="container row">
-        <div class="col-5 alert alert-info" role="alert">
+        <div class="col-8 alert alert-info" role="alert">
             <a href="javascript: history.go(-1)" class="alert-link">COORDENADOR</a>
         </div>
-        <div class="col-7 text-right">
-            <button class="btn btn-info" href="#" onclick="javascript: history.go(-1)"><i class="fas fa-undo-alt"></i> Retornar</button>
+        <div class="col-4 text-right align-middle">
+            <strong>RESULTADO</strong>
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="alert alert-secondary" role="alert">
-        <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}} - <i>CLASSIFICAÇÃO</i></a>
+        <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
     </div>
 </div>
 
@@ -39,38 +39,27 @@
         <table class="table table-bordered table-striped table-sm table-hover mb-0">
             <thead>
                 <tr>
-                    <th rowspan="2" class="align-middle text-center">Núm</th>
-                    <th rowspan="2" class="align-middle">Nome</th>
-                    <th rowspan="2" class="align-middle text-center">Escore</th>
+                    <th class="align-middle text-center">Classificação</th>
+                    <th class="align-middle text-center">Inscrição</th>
+                    <th class="align-middle">Nome</th>
                     {{#each quesitos}}
-                    <th colspan="5" class="text-center">{{descricao}}</th>
+                    <th class="text-center">{{descricao}}</th>
                     {{/each}}
-                </tr>
-                <tr>
-                    {{#each quesitos}}
-                    <th class="text-center">J1</th>
-                    <th class="text-center">J2</th>
-                    <th class="text-center">J3</th>
-                    <th class="text-center">J4</th>
-                    <th class="text-center">J5</th>
-                    {{/each}}
+                    <th class="align-middle text-center">Média Geral</th>
                 </tr>
             </thead>
-
             <tbody id="grid">
                 {{#each resultados}}
                 <tr>
+
+                    <td class="align-middle text-center">{{#fRetIndexP1 @index}}{{/fRetIndexP1}}</td>
                     <td class="align-middle text-center">{{numero}}</td>
+                    <td class="align-middle text-left">{{nome}}</td>
 
-                    <td class="align-middle">
-                        <a href="javascript:void(0)" class="snf-link1"
-                            onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}], {{../evento.id}}, {{id}});">{{nome}}</a>
-                    </td>
-                    <td class="align-middle text-center">{{score}}</td>
-
-                    {{#each notas}}
-                    <td class="align-middle text-center">{{this}}</td>
+                    {{#each medias}}
+                    <td class="align-middle text-center">{{#fAjustaDec this ../../evento.nota_decimais}}{{/fAjustaDec}}</td>
                     {{/each}}
+                    <td class="align-middle text-center">{{#fAjustaDec score ../evento.score_decimais}}{{/fAjustaDec}}</td>
                 </tr>
                 {{/each}}
 
@@ -78,23 +67,6 @@
         </table>
     </div>
 </div>
-<div id="spinner" class="d-none container mt-3 text-center">
-    <i class="fas fa-sync-alt fa-3x fa-spin"></i>
-</div>
-
 
 {{> script_grid_filter}}
 
-<script>
-    function showHide(el) {
-        var display = document.getElementById(el).style.display;
-        alert(el);
-        alert(display);
-        if (display == "none")
-            document.getElementById(el).style.display = 'block';
-        else
-            document.getElementById(el).style.display = 'none';
-    }
-
-
-</script>

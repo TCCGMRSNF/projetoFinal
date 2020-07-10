@@ -61,7 +61,7 @@
             </td>
 
             {{#each notas}}
-            <td class="text-center">{{this}}</td>
+            <td class="text-center">{{#fAjustaDec this ../../evento.nota_decimais}}{{/fAjustaDec}}</td>
             {{/each}}
           </tr>
           {{/each}}
