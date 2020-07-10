@@ -4,8 +4,10 @@
             <a href="javascript: history.go(-1)" class="alert-link">COORDENADOR</a>
         </div>
         <div class="col-7 text-right">
-            <a class="btn btn-danger" href="/notas/scores/{{evento.id}}" role="button"><i class="fas fa-calculator"></i><strong> Calcular</strong></a>
-            <a class="btn btn-info" href="/notas/resultados/{{evento.id}}/R" role="button"><i class="fas fa-user-check"></i><strong> Resultado</strong></a>
+            <a class="btn btn-danger" href="/notas/scores/{{evento.id}}" role="button"><i
+                    class="fas fa-calculator"></i><strong> Calcular</strong></a>
+            <a class="btn btn-info" href="/notas/resultados/{{evento.id}}/R" role="button"><i
+                    class="fas fa-user-check"></i><strong> Resultado</strong></a>
         </div>
     </div>
 
@@ -13,90 +15,88 @@
 
 
 
-    <div class="container">
-        <div class="alert alert-secondary" role="alert">
-            <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
-        </div>
+<div class="container">
+    <div class="alert alert-secondary" role="alert">
+        <a href="javascript: history.go(-1)" class="alert-link">Evento: {{evento.descricao}}</a>
     </div>
+</div>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="input-group">
-                    <input class="form-control" id="busca" type="search" autofocus placeholder="Busca ...">
-                    <span class="input-group-append">
-                        <div class="input-group-text bg-secondary bordered"><i
-                                class="fa fa-search bg-secondary text-warning"></i>
-                        </div>
-                    </span>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group">
+                <input class="form-control" id="busca" type="search" autofocus placeholder="Busca ...">
+                <span class="input-group-append">
+                    <div class="input-group-text bg-secondary bordered"><i
+                            class="fa fa-search bg-secondary text-warning"></i>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
+</div>
 
-    {{!-- Table --}}
-    <div class="container">
-        <div class="mt-3 table-wrapper-scroll-y my-custom-scrollbar">
-            <table class="table table-bordered table-striped table-sm table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th rowspan="2" class="align-middle text-center">Núm</th>
-                        <th rowspan="2" class="align-middle">Nome</th>
-                        <th rowspan="2" class="align-middle text-center">Escore</th>
-                        {{#each quesitos}}
-                        <th colspan="5" class="text-center">{{descricao}}</th>
-                        {{/each}}
-                    </tr>
-                    <tr>
-                        {{#each quesitos}}
-                        <th class="text-center">J1</th>
-                        <th class="text-center">J2</th>
-                        <th class="text-center">J3</th>
-                        <th class="text-center">J4</th>
-                        <th class="text-center">J5</th>
-                        {{/each}}
-                    </tr>
-                </thead>
-
-                <tbody id="grid">
-                    {{#each resultados}}
-                    <tr>
-                        <td class="align-middle text-center">{{numero}}</td>
-
-                        <td class="align-middle">
-                            <a href="javascript:void(0)" class="snf-link1"
-                                onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}], {{../evento.id}}, {{id}});">{{nome}}</a>
-                        </td>
-                        <td class="align-middle text-center">{{#fAjustaDec score 2}}{{/fAjustaDec}}</td>
-
-                        {{#each notas}}
-                        <td class="align-middle text-center">{{#fAjustaDec this 1}}{{/fAjustaDec}}</td>
-                        {{/each}}
-                    </tr>
+{{!-- Table --}}
+<div class="container">
+    <div class="mt-3 table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-bordered table-striped table-sm table-hover mb-0">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="align-middle text-center">Núm</th>
+                    <th rowspan="2" class="align-middle">Nome</th>
+                    <th rowspan="2" class="align-middle text-center">Escore</th>
+                    {{#each quesitos}}
+                    <th colspan="5" class="text-center">{{descricao}}</th>
                     {{/each}}
+                </tr>
+                <tr>
+                    {{#each quesitos}}
+                    {{#each ../avaliadores}}
+                    <th class="text-center">J{{#fRetIndexP1 @index}}{{/fRetIndexP1}}</th>
+                    {{/each}}
+                    {{/each}}
+                </tr>
+            </thead>
 
-                </tbody>
-            </table>
-        </div>
+            <tbody id="grid">
+                {{#each resultados}}
+                <tr>
+                    <td class="align-middle text-center">{{numero}}</td>
+
+                    <td class="align-middle">
+                        <a href="javascript:void(0)" class="snf-link1"
+                            onclick="abreModal('{{numero}}','{{nome}}', selQuesito.value, [{{notas}}], {{../evento.id}}, {{id}});">{{nome}}</a>
+                    </td>
+                    <td class="align-middle text-center">{{#fAjustaDec score 2}}{{/fAjustaDec}}</td>
+
+                    {{#each notas}}
+                    <td class="align-middle text-center">{{#fAjustaDec this 1}}{{/fAjustaDec}}</td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
     </div>
-    <div id="spinner" class="d-none container mt-3 text-center">
-        <i class="fas fa-sync-alt fa-3x fa-spin"></i>
-    </div>
+</div>
+<div id="spinner" class="d-none container mt-3 text-center">
+    <i class="fas fa-sync-alt fa-3x fa-spin"></i>
+</div>
 
 
-    {{> script_grid_filter}}
+{{> script_grid_filter}}
 
-    <script>
-        function showHide(el) {
-            var display = document.getElementById(el).style.display;
-            alert(el);
-            alert(display);
-            if (display == "none")
-                document.getElementById(el).style.display = 'block';
-            else
-                document.getElementById(el).style.display = 'none';
-        }
+<script>
+    function showHide(el) {
+        var display = document.getElementById(el).style.display;
+        alert(el);
+        alert(display);
+        if (display == "none")
+            document.getElementById(el).style.display = 'block';
+        else
+            document.getElementById(el).style.display = 'none';
+    }
 
 
-    </script>
+</script>

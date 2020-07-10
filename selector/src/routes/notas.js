@@ -153,7 +153,7 @@ router.get('/resultados/:evtId/:tpRet', isLoggedIn, async (req, res) => {
     if (tpRet === 'R')
         resultados = await helpers.agregarMedias(resultados, quesitos);
 
-//    console.log(resultados);
+    console.log(avaliadores);
 
     res.render(cRota, { evento: evento[0], quesitos, avaliadores, resultados });
 });
